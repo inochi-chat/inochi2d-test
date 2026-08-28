@@ -50,7 +50,7 @@ info.style.cssText = `
     font-size: 12px;
 `;
 
-info.textContent = puppet.rootNode.children.map((child, i) =>
+info.textContent = `THREE CHILDREN: ${puppet.rootNode.threeObj.children.length}`;
     `${i}: ${child.constructor.name}`
 ).join(' | ');
 document.body.appendChild(info);
