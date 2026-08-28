@@ -14,8 +14,9 @@ const scene = new THREE.Scene();
 const aspectRatio = window.innerWidth / window.innerHeight;
 
 // Set up the parameters for the orthographic camera
-const cameraWidth = 3000; // Width of the camera view
-const cameraHeight = cameraWidth / aspectRatio; // Height of the camera view
+const cameraWidth = 3000;
+const cameraHeight = cameraWidth / aspectRatio;
+
 const camera = new THREE.OrthographicCamera(
     cameraWidth / -2,
     cameraWidth / 2,
@@ -36,7 +37,8 @@ async function loadPuppet() {
     const puppet = await Inochi2D.INP.inImportFromURL('testplay2.inp');
 
     console.log("Loaded " + puppet.meta + "!");
-    const info = document.createElement('div');
+
+   const info = document.createElement('div');
 info.style.cssText = `
     position: fixed;
     top: 10px;
@@ -49,14 +51,8 @@ info.style.cssText = `
 `;
 
 info.textContent = `CHILDREN: ${puppet.rootNode.children.length}`;
-document.body.appendChild(info);  
-`${i}: ${child.constructor.name} X=${child.transform.trans.x} 
-Y=${child.transform.trans.y}`).join('\n');
-X: ${puppet.rootNode.children[0]?.transform.trans.x}
-Y: ${puppet.rootNode.children[0]?.transform.trans.y}
-SCALE: ${puppet.rootNode.children[0]?.transform.scale.x}`;
 document.body.appendChild(info);
-　　　console.log(puppet.rootNode);
+
     Inochi2D.Renderer.renderPuppet(
         puppet,
         scene,
