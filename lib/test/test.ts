@@ -42,12 +42,14 @@ async function loadPuppet() {
     info.textContent = 'THREE CHILDREN: ' + puppet.rootNode.threeObj.children.length;
     document.body.appendChild(info);
 
-    Inochi2D.Renderer.renderPuppet(
-        puppet,
-        scene,
-        camera,
-        renderer
-    );
+    const result = Inochi2D.Renderer.renderPuppet(
+    puppet,
+    scene,
+    camera,
+    renderer
+);
+
+info.textContent = 'THREE CHILDREN: ' + result.rootNode.children.length;
 }
 
 loadPuppet();
