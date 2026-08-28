@@ -33,7 +33,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 async function loadPuppet() {
-    const puppet = await Inochi2D.INP.inImportFromURL('Aka.inx');
+    const puppet = await Inochi2D.INP.inImportFromURL('testplay2.inp');
 
     console.log("Loaded " + puppet.meta + "!");
 
