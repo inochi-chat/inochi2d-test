@@ -14,7 +14,7 @@ const scene = new THREE.Scene();
 const aspectRatio = window.innerWidth / window.innerHeight;
 
 // Set up the parameters for the orthographic camera
-const cameraWidth = 3000; // Width of the camera view
+const cameraWidth = 6000; // Width of the camera view
 const cameraHeight = cameraWidth / aspectRatio; // Height of the camera view
 const camera = new THREE.OrthographicCamera(
     cameraWidth / -2,
