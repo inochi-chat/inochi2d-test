@@ -45,10 +45,12 @@ info.style.cssText = `
     color: white;
     background: black;
     padding: 10px;
-    font-size: 20px;
+    font-size: 12px;
 `;
 
-info.textContent = `CHILDREN: ${puppet.rootNode.children.length}
+info.textContent = puppet.rootNode.children.map((child, i) =>
+    `${i}: ${child.constructor.name} X=${child.transform.trans.x} Y=${child.transform.trans.y}`
+).join('\n');
 X: ${puppet.rootNode.children[0]?.transform.trans.x}
 Y: ${puppet.rootNode.children[0]?.transform.trans.y}
 SCALE: ${puppet.rootNode.children[0]?.transform.scale.x}`;
