@@ -32,9 +32,17 @@ const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-const puppet = await Inochi2D.INP.inImportFromURL('Aka.inx')
+async function loadPuppet() {
+    const puppet = await Inochi2D.INP.inImportFromURL('Aka.inx');
 
-console.log("Loaded " + puppet.meta + "!");
+    console.log("Loaded " + puppet.meta + "!");
 
-// Render the puppet
-const puppetObject = Inochi2D.Renderer.renderPuppet(puppet, scene, camera, renderer);
+    Inochi2D.Renderer.renderPuppet(
+        puppet,
+        scene,
+        camera,
+        renderer
+    );
+}
+
+loadPuppet();
