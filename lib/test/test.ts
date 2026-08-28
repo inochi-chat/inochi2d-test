@@ -7,13 +7,12 @@
     Authors: FartDraws
 */
 
-import * as Inochi2D from '../main'
+import * as Inochi2D from '../main';
 import * as THREE from 'three';
 
 const scene = new THREE.Scene();
 const aspectRatio = window.innerWidth / window.innerHeight;
 
-// Set up the parameters for the orthographic camera
 const cameraWidth = 3000;
 const cameraHeight = cameraWidth / aspectRatio;
 
@@ -26,7 +25,6 @@ const camera = new THREE.OrthographicCamera(
     10000
 );
 
-// Set camera position
 camera.position.set(0, 1, 500);
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -38,22 +36,11 @@ async function loadPuppet() {
 
     console.log("Loaded " + puppet.meta + "!");
 
-   const info = document.createElement('div');
-info.style.cssText = `
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    z-index: 9999;
-    color: white;
-    background: black;
-    padding: 10px;
-    font-size: 12px;
-`;
+    const info = document.createElement('div');
+    info.style.cssText = 'position:fixed;top:10px;left:10px;z-index:9999;color:white;background:black;padding:10px;font-size:20px;';
 
-info.textContent = `THREE CHILDREN: ${puppet.rootNode.threeObj.children.length}`;
-    `${i}: ${child.constructor.name}`
-).join(' | ');
-document.body.appendChild(info);
+    info.textContent = 'THREE CHILDREN: ' + puppet.rootNode.threeObj.children.length;
+    document.body.appendChild(info);
 
     Inochi2D.Renderer.renderPuppet(
         puppet,
