@@ -26,7 +26,7 @@ const camera = new THREE.OrthographicCamera(
 );
 
 // Set camera position
-camera.position.set(0, 1, 500);
+camera.position.set(0, 0, 500);
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
