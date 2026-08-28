@@ -49,7 +49,7 @@ async function loadPuppet() {
     renderer
 );
 
-info.textContent = 'THREE CHILDREN: ' + result.rootNode.children.length;
+info.textContent = 'TEXTURES: ' + puppet.textures.length;
 }
 
 loadPuppet();
