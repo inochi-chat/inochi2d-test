@@ -48,7 +48,10 @@ info.style.cssText = `
     font-size: 20px;
 `;
 
-info.textContent = `CHILDREN: ${puppet.rootNode.children.length}`;
+info.textContent = `CHILDREN: ${puppet.rootNode.children.length}
+X: ${puppet.rootNode.children[0]?.transform.trans.x}
+Y: ${puppet.rootNode.children[0]?.transform.trans.y}
+SCALE: ${puppet.rootNode.children[0]?.transform.scale.x}`;
 document.body.appendChild(info);
 　　　console.log(puppet.rootNode);
     Inochi2D.Renderer.renderPuppet(
