@@ -36,6 +36,20 @@ async function loadPuppet() {
     const puppet = await Inochi2D.INP.inImportFromURL('testplay2.inp');
 
     console.log("Loaded " + puppet.meta + "!");
+    const info = document.createElement('div');
+info.style.cssText = `
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 9999;
+    color: white;
+    background: black;
+    padding: 10px;
+    font-size: 20px;
+`;
+
+info.textContent = `CHILDREN: ${puppet.rootNode.children.length}`;
+document.body.appendChild(info);
 　　　console.log(puppet.rootNode);
     Inochi2D.Renderer.renderPuppet(
         puppet,
