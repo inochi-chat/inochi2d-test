@@ -36,7 +36,7 @@ async function loadPuppet() {
     const puppet = await Inochi2D.INP.inImportFromURL('testplay2.inp');
 
     console.log("Loaded " + puppet.meta + "!");
-
+　　　console.log(puppet.rootNode);
     Inochi2D.Renderer.renderPuppet(
         puppet,
         scene,
