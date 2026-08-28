@@ -50,7 +50,9 @@ info.style.cssText = `
     font-size: 12px;
 `;
 
-info.textContent = `CHILDREN: ${puppet.rootNode.children.length}`;
+info.textContent = puppet.rootNode.children.map((child, i) =>
+    `${i}: ${child.constructor.name}`
+).join(' | ');
 document.body.appendChild(info);
 
     Inochi2D.Renderer.renderPuppet(
