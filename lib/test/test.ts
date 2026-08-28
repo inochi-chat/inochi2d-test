@@ -48,9 +48,10 @@ info.style.cssText = `
     font-size: 12px;
 `;
 
-info.textContent = puppet.rootNode.children.map((child, i) =>
-    `${i}: ${child.constructor.name} X=${child.transform.trans.x} Y=${child.transform.trans.y}`
-).join('\n');
+info.textContent = `CHILDREN: ${puppet.rootNode.children.length}`;
+document.body.appendChild(info);  
+`${i}: ${child.constructor.name} X=${child.transform.trans.x} 
+Y=${child.transform.trans.y}`).join('\n');
 X: ${puppet.rootNode.children[0]?.transform.trans.x}
 Y: ${puppet.rootNode.children[0]?.transform.trans.y}
 SCALE: ${puppet.rootNode.children[0]?.transform.scale.x}`;
