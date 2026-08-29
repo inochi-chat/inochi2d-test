@@ -13,12 +13,14 @@ statusBox.style.cssText = `
   font-size: 20px;
 `;
 
-statusBox.textContent = "NEW TEST START";
+statusBox.textContent = "WASM TEST START";
 document.body.appendChild(statusBox);
 
 async function testWasm() {
   try {
-    const response = await fetch("/inochi2d_bg.wasm");
+    const response = await fetch(
+      "https://inochi-chat.github.io/inochi2d-test/inochi2d_bg.wasm"
+    );
 
     if (!response.ok) {
       throw new Error(`WASM HTTP ${response.status}`);
