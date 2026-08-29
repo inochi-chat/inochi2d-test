@@ -7,15 +7,15 @@
     Authors: FartDraws
 */
 
-import * as Inochi2D from '../main';
+import * as Inochi2D from '../main'
 import * as THREE from 'three';
 
 const scene = new THREE.Scene();
 const aspectRatio = window.innerWidth / window.innerHeight;
 
+// Set up the parameters for the orthographic camera
 const cameraWidth = 3000;
 const cameraHeight = cameraWidth / aspectRatio;
-
 const camera = new THREE.OrthographicCamera(
     cameraWidth / -2,
     cameraWidth / 2,
@@ -25,7 +25,8 @@ const camera = new THREE.OrthographicCamera(
     10000
 );
 
-camera.position.set(0, 1, 10);
+// Set camera position
+camera.position.set(0, 1, 500);
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -36,31 +37,12 @@ async function loadPuppet() {
 
     console.log("Loaded " + puppet.meta + "!");
 
-    const result = Inochi2D.Renderer.renderPuppet(
+    Inochi2D.Renderer.renderPuppet(
         puppet,
         scene,
         camera,
         renderer
     );
-  result.rootNode.traverse((obj: any) => {
-    if (obj instanceof THREE.Mesh) {
-        obj.position.set(0, 0, 0);
-    }
-});
-　　　result.rootNode.scale.set(0.1, 0.1, 0.1);
-　　　result.rootNode.position.set(0, 0, 0);
-    let meshCount = 0;
-
-    result.rootNode.traverse((obj: any) => {
-        if (obj instanceof THREE.Mesh) {
-            meshCount++;
-        }
-    });
-
-    const info = document.createElement('div');
-    info.style.cssText = 'position:fixed;top:10px;left:10px;z-index:9999;color:white;background:black;padding:10px;font-size:20px;';
-    info.textContent = 'MESHES: ' + meshCount;
-    document.body.appendChild(info);
 }
 
 loadPuppet();
