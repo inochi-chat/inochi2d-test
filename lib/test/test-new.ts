@@ -13,23 +13,30 @@ box.style.cssText = `
   font-size: 20px;
 `;
 
-box.textContent = "SCRIPT TEST";
+box.textContent = "WASM INIT...";
 document.body.appendChild(box);
 
-const script = document.createElement("script");
+async function testRuntime() {
+  try {
+    const moduleUrl = new URL(
+      "/inochi2d.js",
+      window.location.origin
+    ).href;
 
-script.type = "module";
-script.src = "/inochi2d.js";
+    const runtimeModule = await (import(moduleUrl) as Promise<any>);
 
-script.onload = () => {
-  box.textContent = "JS LOADED";
-  console.log("inochi2d.js loaded");
-};
+    await runtimeModule.default();
 
-script.onerror = () => {
-  box.textContent = "JS LOAD ERROR";
-  box.style.color = "red";
-  console.error("inochi2d.js failed to load");
-};
+    box.textContent = "WASM INIT OK";
 
-document.head.appendChild(script);
+    console.log("inochi2d module:", runtimeModule);
+    console.log("WASM initialization OK");
+  } catch (error) {
+    console.error(error);
+
+    box.textContent = "WASM INIT ERROR: " + String(error);
+    box.style.color = "red";
+  }
+}
+
+testRuntime();
