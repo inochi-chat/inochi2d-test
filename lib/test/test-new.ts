@@ -38,6 +38,7 @@ await controller.mount(canvas);
 statusBox.textContent = "MODEL LOADING...";
 
 await controller.loadModel("/inochi2d-test/testplay2.inp");
+await controller.setParameterVector("Mouth:: Shape", 1, 0);
 
 statusBox.textContent = "MODEL LOADED!";
     const ctx = canvas.getContext("webgl2");
