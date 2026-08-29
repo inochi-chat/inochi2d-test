@@ -1,7 +1,5 @@
 export {};
 
-import init, { Inochi2dRuntime } from "/inochi2d.js";
-
 const box = document.createElement("div");
 
 box.style.cssText = `
@@ -15,22 +13,20 @@ box.style.cssText = `
   font-size: 20px;
 `;
 
-box.textContent = "WASM INIT...";
+box.textContent = "JS LOAD TEST...";
 document.body.appendChild(box);
 
 async function testRuntime() {
   try {
-    await init();
+    const module = await import("/inochi2d.js");
 
-    const runtime = new Inochi2dRuntime();
+    box.textContent = "JS OK";
 
-    box.textContent = "RUNTIME OK";
-
-    console.log("Inochi2dRuntime:", runtime);
+    console.log("inochi2d.js loaded:", module);
   } catch (error) {
     console.error(error);
 
-    box.textContent = "RUNTIME ERROR: " + String(error);
+    box.textContent = "JS ERROR: " + String(error);
     box.style.color = "red";
   }
 }
