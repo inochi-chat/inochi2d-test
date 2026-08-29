@@ -30,12 +30,11 @@ async function testWasm() {
       `WASM FOUND: ${bytes.byteLength.toLocaleString()} bytes`;
 
     console.log("WASM found:", bytes.byteLength);
-  } catch (error) {
+    } catch (error) {
     console.error(error);
 
-    statusBox.textContent = "WASM ERROR";
+    statusBox.textContent =
+      "WASM ERROR: " + String(error);
+
     statusBox.style.color = "red";
   }
-}
-
-testWasm();
