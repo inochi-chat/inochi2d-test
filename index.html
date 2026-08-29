@@ -1,28 +1,12 @@
 <!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inochi2D Test</title>
-</head>
-<body>
-  <canvas id="app"></canvas>
-
-  <script type="module">
-    import { createInochi2DController }
-      from "/inochi2d/runtime/inochi_bridge.js";
-
-    const canvas = document.getElementById("app");
-
-    const controller = await createInochi2DController({
-      wasmUrl: "/inochi2d/runtime/inochi2d_bg.wasm",
-      debug: true,
-    });
-
-    await controller.mount(canvas);
-    await controller.loadModel("/testplay2.inp");
-
-    console.log("INOCHI2D MODEL LOADED");
-  </script>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inochi2D example</title>
+  </head>
+  <body>
+    <canvas id="app"></canvas>
+<script type="module" src="/lib/test/test.ts"></script>
+  </body>
 </html>
