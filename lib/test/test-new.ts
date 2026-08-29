@@ -1,8 +1,10 @@
 export {};
 
-const statusBox = document.createElement("div");
+import init, { Inochi2dRuntime } from "/inochi2d.js";
 
-statusBox.style.cssText = `
+const box = document.createElement("div");
+
+box.style.cssText = `
   position: fixed;
   top: 20px;
   left: 20px;
@@ -13,33 +15,24 @@ statusBox.style.cssText = `
   font-size: 20px;
 `;
 
-statusBox.textContent = "WASM TEST START";
-document.body.appendChild(statusBox);
+box.textContent = "WASM INIT...";
+document.body.appendChild(box);
 
-async function testWasm() {
+async function testRuntime() {
   try {
-    const response = await fetch(
-      "https://inochi-chat.github.io/inochi2d-test/inochi2d_bg.wasm"
-    );
+    await init();
 
-    if (!response.ok) {
-      throw new Error(`WASM HTTP ${response.status}`);
-    }
+    const runtime = new Inochi2dRuntime();
 
-    const bytes = await response.arrayBuffer();
+    box.textContent = "RUNTIME OK";
 
-    statusBox.textContent =
-      `WASM FOUND: ${bytes.byteLength.toLocaleString()} bytes`;
-
-    console.log("WASM found:", bytes.byteLength);
+    console.log("Inochi2dRuntime:", runtime);
   } catch (error) {
     console.error(error);
 
-    statusBox.textContent =
-      "WASM ERROR: " + String(error);
-
-    statusBox.style.color = "red";
+    box.textContent = "RUNTIME ERROR: " + String(error);
+    box.style.color = "red";
   }
 }
 
-testWasm();
+testRuntime();
