@@ -42,7 +42,11 @@ async function loadPuppet() {
         camera,
         renderer
     );
-    result.rootNode.rotation.z = Math.PI / 2;
+  result.rootNode.traverse((obj: any) => {
+    if (obj instanceof THREE.Mesh) {
+        obj.position.set(0, 0, 0);
+    }
+});
 　　　result.rootNode.scale.set(0.1, 0.1, 0.1);
 　　　result.rootNode.position.set(0, 0, 0);
     let meshCount = 0;
