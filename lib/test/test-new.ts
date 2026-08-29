@@ -1,5 +1,8 @@
-const status = document.createElement("div");
-status.style.cssText = `
+export {};
+
+const statusBox = document.createElement("div");
+
+statusBox.style.cssText = `
   position: fixed;
   top: 20px;
   left: 20px;
@@ -9,10 +12,11 @@ status.style.cssText = `
   padding: 12px;
   font-size: 20px;
 `;
-status.textContent = "NEW TEST START";
-document.body.appendChild(status);
 
-async function test() {
+statusBox.textContent = "NEW TEST START";
+document.body.appendChild(statusBox);
+
+async function testWasm() {
   try {
     const response = await fetch("/inochi2d_bg.wasm");
 
@@ -22,15 +26,16 @@ async function test() {
 
     const bytes = await response.arrayBuffer();
 
-    status.textContent =
+    statusBox.textContent =
       `WASM FOUND: ${bytes.byteLength.toLocaleString()} bytes`;
 
     console.log("WASM found:", bytes.byteLength);
   } catch (error) {
     console.error(error);
-    status.textContent = "WASM ERROR";
-    status.style.color = "red";
+
+    statusBox.textContent = "WASM ERROR";
+    statusBox.style.color = "red";
   }
 }
 
-test();
+testWasm();
