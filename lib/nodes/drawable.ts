@@ -116,7 +116,7 @@ export class Part extends Drawable {
             const { _constant } = blendModeData;
 
             // If there's textures
-            if (partTextures.length > 0 && partTextures[0]) {
+            if (partTextures) {
                 // console.log(blendModeData._blendmode.valueOf() + ", " + _constant.valueOf());
                 const texture = partTextures[0]; // Using the first texture as an example
 
