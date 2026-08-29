@@ -48,11 +48,14 @@ async function loadPuppet() {
 
 info.textContent = 'THREE CHILDREN: ' + result.rootNode.children.length;
 
+let meshCount = 0;
+
 result.rootNode.traverse((obj: any) => {
     if (obj instanceof THREE.Mesh) {
-        obj.material = new THREE.MeshBasicMaterial({ color: 'white' });
+        meshCount++;
     }
 });
-}
+
+info.textContent = 'MESHES: ' + meshCount;
 
 loadPuppet();
