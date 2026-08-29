@@ -39,9 +39,6 @@ async function loadPuppet() {
     const info = document.createElement('div');
     info.style.cssText = 'position:fixed;top:10px;left:10px;z-index:9999;color:white;background:black;padding:10px;font-size:20px;';
 
-    info.textContent = 'THREE CHILDREN: ' + puppet.rootNode.threeObj.children.length;
-    document.body.appendChild(info);
-
     const result = Inochi2D.Renderer.renderPuppet(
     puppet,
     scene,
@@ -49,7 +46,13 @@ async function loadPuppet() {
     renderer
 );
 
-info.textContent = 'TEXTURES: ' + puppet.textures.length;
+info.textContent = 'THREE CHILDREN: ' + result.rootNode.children.length;
+
+result.rootNode.traverse((obj: any) => {
+    if (obj instanceof THREE.Mesh) {
+        obj.material = new THREE.MeshBasicMaterial({ color: 'white' });
+    }
+});
 }
 
 loadPuppet();
