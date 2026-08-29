@@ -1,24 +1,35 @@
-import init from '../../public/inochi2d.js';
+const status = document.createElement("div");
+status.style.cssText = `
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 9999;
+  color: lime;
+  background: black;
+  padding: 12px;
+  font-size: 20px;
+`;
+status.textContent = "NEW TEST START";
+document.body.appendChild(status);
 
 async function test() {
   try {
-    await init();
+    const response = await fetch("/inochi2d_bg.wasm");
 
-    document.body.innerHTML = `
-      <h1 style="color:lime; font-size:40px;">
-        WASM OK
-      </h1>
-    `;
+    if (!response.ok) {
+      throw new Error(`WASM HTTP ${response.status}`);
+    }
 
-    console.log("WASM OK");
+    const bytes = await response.arrayBuffer();
+
+    status.textContent =
+      `WASM FOUND: ${bytes.byteLength.toLocaleString()} bytes`;
+
+    console.log("WASM found:", bytes.byteLength);
   } catch (error) {
     console.error(error);
-
-    document.body.innerHTML = `
-      <h1 style="color:red; font-size:40px;">
-        WASM ERROR
-      </h1>
-    `;
+    status.textContent = "WASM ERROR";
+    status.style.color = "red";
   }
 }
 
