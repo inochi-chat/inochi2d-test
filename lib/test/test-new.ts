@@ -49,6 +49,15 @@ if (!ctx) {
 }
 
 statusBox.textContent = "MODEL LOADED + WEBGL2 OK";
+await controller.resize(
+  window.innerWidth,
+  window.innerHeight,
+  window.devicePixelRatio
+);
+
+await controller.setCameraTransform(0, 0, 0.15);
+
+statusBox.textContent = "MODEL LOADED + CAMERA OK";    
 
 console.log("Canvas:", canvas.width, canvas.height);
 console.log("WebGL2:", ctx);
