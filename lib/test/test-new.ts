@@ -26,6 +26,20 @@ async function start() {
     });
 
     statusBox.textContent = "WASM INIT OK";
+    const canvas = document.getElementById("app") as HTMLCanvasElement;
+
+canvas.style.width = "100vw";
+canvas.style.height = "100vh";
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+await controller.mount(canvas);
+
+statusBox.textContent = "MODEL LOADING...";
+
+await controller.loadModel("/inochi2d-test/testplay2.inp");
+
+statusBox.textContent = "MODEL LOADED!";
 
     console.log("Controller:", controller);
   } catch (error) {
