@@ -40,6 +40,19 @@ statusBox.textContent = "MODEL LOADING...";
 await controller.loadModel("/inochi2d-test/testplay2.inp");
 
 statusBox.textContent = "MODEL LOADED!";
+    const ctx = canvas.getContext("webgl2");
+
+if (!ctx) {
+  statusBox.textContent = "WEBGL2 ERROR";
+  statusBox.style.color = "red";
+  return;
+}
+
+statusBox.textContent = "MODEL LOADED + WEBGL2 OK";
+
+console.log("Canvas:", canvas.width, canvas.height);
+console.log("WebGL2:", ctx);
+console.log("Controller:", controller);
 
     console.log("Controller:", controller);
   } catch (error) {
