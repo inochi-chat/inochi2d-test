@@ -32,7 +32,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 async function loadPuppet() {
-    const puppet = await Inochi2D.INP.inImportFromURL('Aka.inx');
+    const puppet = await Inochi2D.INP.inImportFromURL('testplay2.inp');
 
     console.log("Loaded " + puppet.meta + "!");
 
@@ -42,7 +42,8 @@ async function loadPuppet() {
         camera,
         renderer
     );
-　　　
+　　　result.rootNode.scale.set(0.01, 0.01, 0.01);
+　　　result.rootNode.position.set(0, 0, 0);
     let meshCount = 0;
 
     result.rootNode.traverse((obj: any) => {
