@@ -36,26 +36,25 @@ async function loadPuppet() {
 
     console.log("Loaded " + puppet.meta + "!");
 
+    const result = Inochi2D.Renderer.renderPuppet(
+        puppet,
+        scene,
+        camera,
+        renderer
+    );
+
+    let meshCount = 0;
+
+    result.rootNode.traverse((obj: any) => {
+        if (obj instanceof THREE.Mesh) {
+            meshCount++;
+        }
+    });
+
     const info = document.createElement('div');
     info.style.cssText = 'position:fixed;top:10px;left:10px;z-index:9999;color:white;background:black;padding:10px;font-size:20px;';
-
-    const result = Inochi2D.Renderer.renderPuppet(
-    puppet,
-    scene,
-    camera,
-    renderer
-);
-
-info.textContent = 'THREE CHILDREN: ' + result.rootNode.children.length;
-
-let meshCount = 0;
-
-result.rootNode.traverse((obj: any) => {
-    if (obj instanceof THREE.Mesh) {
-        meshCount++;
-    }
-});
-
-info.textContent = 'MESHES: ' + meshCount;
+    info.textContent = 'MESHES: ' + meshCount;
+    document.body.appendChild(info);
+}
 
 loadPuppet();
