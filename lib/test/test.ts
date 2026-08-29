@@ -42,7 +42,7 @@ async function loadPuppet() {
         camera,
         renderer
     );
-　　　result.rootNode.scale.set(0.1, 0.1, 0.1);
+　　　
     let meshCount = 0;
 
     result.rootNode.traverse((obj: any) => {
