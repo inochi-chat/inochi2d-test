@@ -41,6 +41,9 @@ await controller.loadModel("/inochi2d-test/testplay2.inp");
 await controller.setParameterVector("Mouth:: Shape", 1, 0);
 
 statusBox.textContent = "MODEL LOADED!";
+    await controller.setParameterVector("Mouth:: Shape", 1, 0);
+
+statusBox.textContent = "MOUTH TEST!";
     const ctx = canvas.getContext("webgl2");
 
 if (!ctx) {
