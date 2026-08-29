@@ -13,22 +13,23 @@ box.style.cssText = `
   font-size: 20px;
 `;
 
-box.textContent = "JS LOAD TEST...";
+box.textContent = "SCRIPT TEST";
 document.body.appendChild(box);
 
-async function testRuntime() {
-  try {
-    const module = await import("/inochi2d.js");
+const script = document.createElement("script");
 
-    box.textContent = "JS OK";
+script.type = "module";
+script.src = "/inochi2d.js";
 
-    console.log("inochi2d.js loaded:", module);
-  } catch (error) {
-    console.error(error);
+script.onload = () => {
+  box.textContent = "JS LOADED";
+  console.log("inochi2d.js loaded");
+};
 
-    box.textContent = "JS ERROR: " + String(error);
-    box.style.color = "red";
-  }
-}
+script.onerror = () => {
+  box.textContent = "JS LOAD ERROR";
+  box.style.color = "red";
+  console.error("inochi2d.js failed to load");
+};
 
-testRuntime();
+document.head.appendChild(script);
