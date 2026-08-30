@@ -1,19 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Inochi2D example</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+
+    <title>Inochi2D Face Tracking Test</title>
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #111;
+      }
+
+      #app {
+        display: block;
+        width: 100vw;
+        height: 100vh;
+      }
+
+      #face-camera {
+        position: fixed;
+        right: 10px;
+        bottom: 10px;
+        width: 160px;
+        height: 120px;
+        object-fit: cover;
+        transform: scaleX(-1);
+        z-index: 9998;
+        border: 2px solid white;
+        border-radius: 8px;
+        background: black;
+      }
+
+      #tracking-info {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        z-index: 9999;
+
+        padding: 12px;
+
+        color: white;
+        background: rgba(0, 0, 0, 0.8);
+
+        font-family: monospace;
+        font-size: 15px;
+        line-height: 1.5;
+
+        white-space: pre;
+        border-radius: 8px;
+      }
+    </style>
   </head>
+
   <body>
-  <video
-    id="face-camera"
-    autoplay
-    playsinline
-    muted
-    style="display: none;"
-  ></video>
-  <canvas id="app"></canvas>
-  <script type="module" src="/lib/test/test-new.ts"></script>
-</body>
+    <video
+      id="face-camera"
+      autoplay
+      playsinline
+      muted
+    ></video>
+
+    <div id="tracking-info">
+      FACE TRACKING
+      初期化中...
+    </div>
+
+    <canvas id="app"></canvas>
+
+    <script
+      type="module"
+      src="/lib/test/test-new.ts"
+    ></script>
+  </body>
 </html>
