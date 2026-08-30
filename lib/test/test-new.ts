@@ -39,7 +39,7 @@ async function start() {
     await controller.mount(canvas);
 
     statusBox.textContent = "MODEL LOADING...";
-
+　　　　await controller.setParameterValue("Param #0", 1);
     await controller.loadModel("/inochi2d-test/testplay2.inp");
 
 　　　await controller.setParameterValue("Param #1", 1);
