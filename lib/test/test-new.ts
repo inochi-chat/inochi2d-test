@@ -42,12 +42,13 @@ async function start() {
 
     await controller.loadModel("/inochi2d-test/testplay2.inp");
 
-    // 以前モデルが表示できていた状態に戻す
-    await controller.resize(
-      window.innerWidth,
-      window.innerHeight,
-      window.devicePixelRatio
-    );
+　　　await controller.setParameterValue("Param #0", 1);
+
+　　　await controller.resize(
+     window.innerWidth,
+　　  window.innerHeight,
+     window.devicePixelRatio               
+　　　);
 
     await controller.setCameraTransform(0, 0, 0.15);
 
