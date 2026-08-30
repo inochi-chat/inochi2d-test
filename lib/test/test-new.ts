@@ -41,6 +41,10 @@ await controller.loadModel("/inochi2d-test/testplay2.inp");
 await controller.setParameterVector("Mouth:: Shape", 1, 0);
 
 statusBox.textContent = "MODEL LOADED!";
+    
+await controller.setParameterVector("Mouth:: Shape", 1, 0);
+
+statusBox.textContent = "MODEL LOADED! + MOUTH FORCE";
 
 setInterval(() => {
   const canvas = document.getElementById("app") as HTMLCanvasElement;
