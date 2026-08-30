@@ -39,26 +39,27 @@ async function start() {
     await controller.mount(canvas);
 
     statusBox.textContent = "MODEL LOADING...";
-　　　　await controller.setParameterValue("Param #0", 1);
-    await controller.loadModel("/inochi2d-test/testplay2.inp");
 
-　　　await controller.setParameterValue("Param #0", 1);
-
-　　　await controller.resize(
-     window.innerWidth,
-　　  window.innerHeight,
-     window.devicePixelRatio               
-　　　);
-
-    await controller.setCameraTransform(0, 0, 0.15);
+    await controller.loadModel(
+      "/inochi2d-test/testplay2.inp"
+    );
 
     statusBox.textContent = "MODEL LOADED!";
 
-    const mouthDebug =
-      canvas.dataset.inochi2dMouthDebug ??
-      "MOUTH DEBUG: no data";
+    await controller.resize(
+      window.innerWidth,
+      window.innerHeight,
+      window.devicePixelRatio
+    );
+
+    await controller.setCameraTransform(0, 0, 0.15);
+
+    // テスト：Param #0 を1にする
+    await controller.setParameterValue("Param #0", 1);
 
     console.log("Controller:", controller);
+
+    statusBox.textContent = "MODEL LOADED!\nParam #0 = 1";
 
   } catch (error) {
     console.error(error);
