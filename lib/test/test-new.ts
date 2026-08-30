@@ -31,16 +31,11 @@ async function start() {
     await controller.loadModel("/inochi2d-test/testplay2.inp");
     statusBox.textContent = "MODEL LOADED!";
     await controller.setParameterVector("Mouth:: Shape", 1, 0);
-    setInterval(() => {
-      const mouthParameters =
-        canvas.dataset.inochi2dMouthParameters ??
-        "MOUTH PARAMETERS: no data";
+    
       const mouthDebug =
         canvas.dataset.inochi2dMouthDebug ??
         "MOUTH DEBUG: no data";
-      statusBox.textContent =
-        `MODEL LOADED!\n${mouthParameters}\n${mouthDebug}`;
-    }, 200);
+      
     console.log("Controller:", controller);
   } catch (error) {
     console.error(error);
