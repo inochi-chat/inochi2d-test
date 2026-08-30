@@ -41,6 +41,27 @@ await controller.loadModel("/inochi2d-test/testplay2.inp");
 await controller.setParameterVector("Mouth:: Shape", 1, 0);
 
 statusBox.textContent = "MODEL LOADED!";
+
+setInterval(() => {
+  const canvas = document.getElementById("app") as HTMLCanvasElement;
+
+  const mouthDebug =
+    canvas.dataset.inochi2dMouthDebug ?? "MOUTH DEBUG: no data";
+
+  statusBox.textContent =
+    `MODEL LOADED!\n${mouthDebug}`;
+}, 200);
+ 
+
+setInterval(() => {
+  const canvas = document.getElementById("app") as HTMLCanvasElement;
+
+  const mouthDebug =
+    canvas.dataset.inochi2dMouthDebug ?? "MOUTH DEBUG: no data";
+
+  statusBox.textContent =
+    `MODEL LOADED!\n${mouthDebug}`;
+}, 200);   
     await controller.setParameterVector("Mouth:: Shape", 1, 0);
 
 statusBox.textContent = "MOUTH TEST!";
