@@ -1,73 +1,87 @@
-import { createInochi2DController } from "./inochi_bridge.js";
+window.addEventListener("DOMContentLoaded", () => {
 
-const statusBox = document.createElement("div");
+  const video = document.getElementById(
+    "face-camera"
+  ) as HTMLVideoElement;
 
-statusBox.style.cssText = `
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 9999;
-  color: lime;
-  background: black;
-  padding: 12px;
-  font-size: 18px;
-  white-space: pre-line;
-`;
+  const info = document.getElementById(
+    "tracking-info"
+  ) as HTMLDivElement;
 
-statusBox.textContent = "BRIDGE IMPORT OK";
-document.body.appendChild(statusBox);
+  const home = document.getElementById(
+    "home"
+  ) as HTMLDivElement;
 
-async function start() {
-  try {
-    statusBox.textContent = "WASM INITIALIZING...";
+  const startButton = document.getElementById(
+    "start-button"
+  ) as HTMLButtonElement;
 
-    const controller = await createInochi2DController({
-      wasmUrl: "/inochi2d-test/inochi2d_bg.wasm",
-      debug: true,
-    });
+  if (!video || !info || !home || !startButton) {
+    document.body.innerHTML = `
+      <div style="
+        color:white;
+        background:#111;
+        padding:30px;
+        font-family:monospace;
+      ">
+        ERROR<br><br>
+        HTML ELEMENT NOT FOUND
+      </div>
+    `;
 
-    statusBox.textContent = "WASM INIT OK";
-
-    const canvas = document.getElementById("app") as HTMLCanvasElement;
-
-    canvas.style.width = "100vw";
-    canvas.style.height = "100vh";
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    await controller.mount(canvas);
-
-    statusBox.textContent = "MODEL LOADING...";
-
-    await controller.loadModel(
-      "/inochi2d-test/testplay2.inp"
-    );
-
-    statusBox.textContent = "MODEL LOADED!";
-
-    await controller.resize(
-      window.innerWidth,
-      window.innerHeight,
-      window.devicePixelRatio
-    );
-
-    await controller.setCameraTransform(0, 0, 0.15);
-
-    await controller.setParameterValue("Param #0", 1);
-
-    console.log("Controller:", controller);
-
-    statusBox.textContent = "MODEL LOADED!\nParam #0 = 1";
-
-  } catch (error) {
-    console.error(error);
-
-    statusBox.textContent =
-      "ERROR: " + String(error);
-
-    statusBox.style.color = "red";
+    return;
   }
-}
 
-start();
+  function show(text: string) {
+    info.textContent = text;
+  }
+
+  async function startCamera() {
+    try {
+      startButton.disabled = true;
+      startButton.textContent = "起動中...";
+
+      show("CAMERA STARTING...");
+
+      const stream =
+        await navigator.mediaDevices.getUserMedia({
+          video: {
+            facingMode: "user"
+          },
+          audio: false
+        });
+
+      video.srcObject = stream;
+
+      video.style.display = "block";
+      home.style.display = "none";
+      info.style.display = "block";
+
+      await video.play();
+
+      show(
+        "CAMERA OK\n\n" +
+        "カメラ映像を表示中"
+      );
+
+    } catch (error) {
+      console.error(error);
+
+      startButton.disabled = false;
+      startButton.textContent = "カメラを起動";
+
+      info.style.display = "block";
+
+      show(
+        "CAMERA ERROR\n\n" +
+        String(error)
+      );
+    }
+  }
+
+  startButton.addEventListener(
+    "click",
+    startCamera
+  );
+
+});
