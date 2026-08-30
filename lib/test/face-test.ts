@@ -44,3 +44,5 @@ async function startCamera() {
 }
 
 startCamera();
+
+export {};
