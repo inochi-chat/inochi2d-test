@@ -69,23 +69,5 @@ async function start() {
     statusBox.style.color = "red";
   }
 }
-const faceCamera = document.getElementById(
-  'face-camera',
-) as HTMLVideoElement | null;
 
-if (faceCamera) {
-  try {
-    const stream = await navigator.mediaDevices.getUserMedia({
-      video: {
-        facingMode: 'user',
-      },
-      audio: false,
-    });
-
-    faceCamera.srcObject = stream;
-    console.log('カメラ起動成功');
-  } catch (error) {
-    console.error('カメラ起動失敗:', error);
-  }
-}
 start();
