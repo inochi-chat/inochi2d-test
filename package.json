@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@lunapaint/tga-codec": "^0.1.0",
-    "@mediapipe/tasks-vision": "^0.10.22",
+  
     "binary-parser": "^2.2.1",
     "fast-png": "^6.1.0",
     "three": "^0.146.0"
