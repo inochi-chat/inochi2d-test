@@ -42,7 +42,8 @@ async function start() {
 　　　　await controller.setParameterValue("Param #0", 1);
     await controller.loadModel("/inochi2d-test/testplay2.inp");
 
-　　　await controller.setParameterValue("Param #1", 1);
+　　　await controller.setParameterValue("Param #0", 0);
+　　　　await controller.setParameterValue("Param #1", 1);
 
 　　　await controller.resize(
      window.innerWidth,
