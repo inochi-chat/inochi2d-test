@@ -28,24 +28,36 @@ async function startCamera() {
     const stream =
       await navigator.mediaDevices.getUserMedia({
         video: {
-          facingMode: "user",
-          width: { ideal: 640 },
-          height: { ideal: 480 }
+          facingMode: "user"
         },
         audio: false
       });
 
     video.srcObject = stream;
 
-    await video.play();
-
-    home.style.display = "none";
+    // カメラ映像を表示
     video.style.display = "block";
+
+    // ホーム画面を消す
+    home.style.display = "none";
+
+    // ステータス表示
     info.style.display = "block";
+
+    // Safariで映像が再生可能になるまで待つ
+    await new Promise<void>((resolve) => {
+      if (video.readyState >= 2) {
+        resolve();
+      } else {
+        video.onloadeddata = () => resolve();
+      }
+    });
+
+    await video.play();
 
     show(
       "CAMERA OK\n\n" +
-      "顔トラッキング準備中..."
+      "カメラ映像を表示中"
     );
 
   } catch (error) {
@@ -53,6 +65,8 @@ async function startCamera() {
 
     startButton.disabled = false;
     startButton.textContent = "カメラを起動";
+
+    info.style.display = "block";
 
     show(
       "CAMERA ERROR\n\n" +
