@@ -62,6 +62,9 @@ setInterval(() => {
 
   const mouthDebug =
     canvas.dataset.inochi2dMouthDebug ?? "MOUTH DEBUG: no data";
+  
+  const mouthParameters =
+  canvas.dataset.inochi2dMouthParameters ?? "MOUTH PARAMETERS: no data";
 
   statusBox.textContent =
     `MODEL LOADED!\n${mouthDebug}`;
@@ -100,7 +103,12 @@ console.log("Controller:", controller);
       "WASM INIT ERROR: " + String(error);
 
     statusBox.style.color = "red";
+　　　statusBox.textContent =
+    `MODEL LOADED!\n${mouthParameters}\n${mouthDebug}`;
+
   }
 }
 
 start();
+
+  
