@@ -1,46 +1,49 @@
 export {};
 
 window.addEventListener("DOMContentLoaded", () => {
-  const video = document.getElementById(
-    "face-camera"
-  ) as HTMLVideoElement;
+  const video = document.getElementById("face-camera");
+  const info = document.getElementById("tracking-info");
+  const home = document.getElementById("home");
+  const startButton = document.getElementById("start-button");
 
-  const info = document.getElementById(
-    "tracking-info"
-  ) as HTMLDivElement;
+  const missing: string[] = [];
 
-  const home = document.getElementById(
-    "home"
-  ) as HTMLDivElement;
+  if (!video) missing.push("face-camera");
+  if (!info) missing.push("tracking-info");
+  if (!home) missing.push("home");
+  if (!startButton) missing.push("start-button");
 
-  const startButton = document.getElementById(
-    "start-button"
-  ) as HTMLButtonElement;
-
-  if (!video || !info || !home || !startButton) {
+  if (missing.length > 0) {
     document.body.innerHTML = `
       <div style="
         color: white;
         background: #111;
         padding: 30px;
         font-family: monospace;
+        font-size: 18px;
       ">
-        ERROR<br><br>
-        HTML ELEMENT NOT FOUND
+        HTML ELEMENT NOT FOUND<br><br>
+        Missing:<br>
+        ${missing.join("<br>")}
       </div>
     `;
 
     return;
   }
 
+  const videoElement = video as HTMLVideoElement;
+  const infoElement = info as HTMLDivElement;
+  const homeElement = home as HTMLDivElement;
+  const startButtonElement = startButton as HTMLButtonElement;
+
   function show(text: string) {
-    info.textContent = text;
+    infoElement.textContent = text;
   }
 
   async function startCamera() {
     try {
-      startButton.disabled = true;
-      startButton.textContent = "起動中...";
+      startButtonElement.disabled = true;
+      startButtonElement.textContent = "起動中...";
 
       show("CAMERA STARTING...");
 
@@ -52,13 +55,13 @@ window.addEventListener("DOMContentLoaded", () => {
           audio: false
         });
 
-      video.srcObject = stream;
+      videoElement.srcObject = stream;
 
-      video.style.display = "block";
-      home.style.display = "none";
-      info.style.display = "block";
+      videoElement.style.display = "block";
+      homeElement.style.display = "none";
+      infoElement.style.display = "block";
 
-      await video.play();
+      await videoElement.play();
 
       show(
         "CAMERA OK\n\n" +
@@ -68,10 +71,10 @@ window.addEventListener("DOMContentLoaded", () => {
     } catch (error) {
       console.error(error);
 
-      startButton.disabled = false;
-      startButton.textContent = "カメラを起動";
+      startButtonElement.disabled = false;
+      startButtonElement.textContent = "カメラを起動";
 
-      info.style.display = "block";
+      infoElement.style.display = "block";
 
       show(
         "CAMERA ERROR\n\n" +
@@ -80,7 +83,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  startButton.addEventListener(
+  startButtonElement.addEventListener(
     "click",
     startCamera
   );
