@@ -1,5 +1,6 @@
-window.addEventListener("DOMContentLoaded", () => {
+export {};
 
+window.addEventListener("DOMContentLoaded", () => {
   const video = document.getElementById(
     "face-camera"
   ) as HTMLVideoElement;
@@ -19,10 +20,10 @@ window.addEventListener("DOMContentLoaded", () => {
   if (!video || !info || !home || !startButton) {
     document.body.innerHTML = `
       <div style="
-        color:white;
-        background:#111;
-        padding:30px;
-        font-family:monospace;
+        color: white;
+        background: #111;
+        padding: 30px;
+        font-family: monospace;
       ">
         ERROR<br><br>
         HTML ELEMENT NOT FOUND
@@ -83,5 +84,4 @@ window.addEventListener("DOMContentLoaded", () => {
     "click",
     startCamera
   );
-
 });
