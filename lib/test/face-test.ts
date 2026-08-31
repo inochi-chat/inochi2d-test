@@ -1,89 +1,199 @@
 export {};
 
+declare global {
+  interface Window {
+    mediapipeTest?: {
+      FaceLandmarker: any;
+      FilesetResolver: any;
+    };
+  }
+}
+
 window.addEventListener("DOMContentLoaded", () => {
-  const video = document.getElementById("face-camera");
-  const info = document.getElementById("tracking-info");
-  const home = document.getElementById("home");
-  const startButton = document.getElementById("start-button");
+  const video = document.getElementById(
+    "face-camera"
+  ) as HTMLVideoElement;
 
-  const missing: string[] = [];
+  const info = document.getElementById(
+    "tracking-info"
+  ) as HTMLDivElement;
 
-  if (!video) missing.push("face-camera");
-  if (!info) missing.push("tracking-info");
-  if (!home) missing.push("home");
-  if (!startButton) missing.push("start-button");
+  const home = document.getElementById(
+    "home"
+  ) as HTMLDivElement;
 
-  if (missing.length > 0) {
+  const startButton = document.getElementById(
+    "start-button"
+  ) as HTMLButtonElement;
+
+  if (!video || !info || !home || !startButton) {
     document.body.innerHTML = `
       <div style="
-        color: white;
-        background: #111;
-        padding: 30px;
-        font-family: monospace;
-        font-size: 18px;
+        color:white;
+        background:#111;
+        padding:30px;
+        font-family:monospace;
       ">
-        HTML ELEMENT NOT FOUND<br><br>
-        Missing:<br>
-        ${missing.join("<br>")}
+        HTML ELEMENT NOT FOUND
       </div>
     `;
 
     return;
   }
 
-  const videoElement = video as HTMLVideoElement;
-  const infoElement = info as HTMLDivElement;
-  const homeElement = home as HTMLDivElement;
-  const startButtonElement = startButton as HTMLButtonElement;
-
   function show(text: string) {
-    infoElement.textContent = text;
+    info.textContent = text;
   }
 
   async function startCamera() {
     try {
-      startButtonElement.disabled = true;
-      startButtonElement.textContent = "起動中...";
-
-      show("CAMERA STARTING...");
+      startButton.disabled = true;
+      startButton.textContent = "起動中...";
 
       const stream =
         await navigator.mediaDevices.getUserMedia({
           video: {
-            facingMode: "user"
+            facingMode: "user",
+            width: { ideal: 640 },
+            height: { ideal: 480 }
           },
           audio: false
         });
 
-      videoElement.srcObject = stream;
+      video.srcObject = stream;
 
-      videoElement.style.display = "block";
-      homeElement.style.display = "none";
-      infoElement.style.display = "block";
+      video.style.display = "block";
+      home.style.display = "none";
+      info.style.display = "block";
 
-      await videoElement.play();
+      await video.play();
 
       show(
         "CAMERA OK\n\n" +
-        "カメラ映像を表示中"
+        "MEDIAPIPE CHECKING..."
       );
+
+      if (!window.mediapipeTest) {
+        throw new Error(
+          "MediaPipe CDN NOT LOADED"
+        );
+      }
+
+      const {
+        FaceLandmarker,
+        FilesetResolver
+      } = window.mediapipeTest;
+
+      show(
+        "CAMERA OK\n\n" +
+        "MEDIAPIPE OK\n\n" +
+        "FACE MODEL LOADING..."
+      );
+
+      const vision =
+        await FilesetResolver.forVisionTasks(
+          "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.35/wasm"
+        );
+
+      const faceLandmarker =
+        await FaceLandmarker.createFromOptions(
+          vision,
+          {
+            baseOptions: {
+              modelAssetPath:
+                "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task",
+
+              delegate: "GPU"
+            },
+
+            runningMode: "VIDEO",
+
+            numFaces: 1,
+
+            outputFaceBlendshapes: true
+          }
+        );
+
+      show(
+        "FACE TRACKING READY\n\n" +
+        "顔をカメラに映してね"
+      );
+
+      let lastVideoTime = -1;
+
+      function trackingLoop() {
+        if (
+          video.readyState >= 2 &&
+          video.currentTime !== lastVideoTime
+        ) {
+          lastVideoTime = video.currentTime;
+
+          const result =
+            faceLandmarker.detectForVideo(
+              video,
+              performance.now()
+            );
+
+          if (
+            !result.faceBlendshapes ||
+            result.faceBlendshapes.length === 0
+          ) {
+            show(
+              "FACE TRACKING\n\n" +
+              "NOT TRACKING"
+            );
+          } else {
+            const categories =
+              result.faceBlendshapes[0].categories;
+
+            function getValue(name: string) {
+              const item = categories.find(
+                (x: any) =>
+                  x.categoryName === name
+              );
+
+              return item
+                ? item.score
+                : 0;
+            }
+
+            const left =
+              getValue("eyeBlinkLeft");
+
+            const right =
+              getValue("eyeBlinkRight");
+
+            const mouth =
+              getValue("jawOpen");
+
+            show(
+              "FACE TRACKING\n\n" +
+              "● TRACKING\n\n" +
+              `Left Eye  : ${left.toFixed(3)}\n` +
+              `Right Eye : ${right.toFixed(3)}\n` +
+              `Mouth     : ${mouth.toFixed(3)}`
+            );
+          }
+        }
+
+        requestAnimationFrame(trackingLoop);
+      }
+
+      trackingLoop();
 
     } catch (error) {
       console.error(error);
 
-      startButtonElement.disabled = false;
-      startButtonElement.textContent = "カメラを起動";
-
-      infoElement.style.display = "block";
+      info.style.display = "block";
 
       show(
-        "CAMERA ERROR\n\n" +
+        "ERROR\n\n" +
         String(error)
       );
     }
   }
 
-  startButtonElement.addEventListener(
+  startButton.addEventListener(
     "click",
     startCamera
   );
