@@ -148,16 +148,39 @@ window.addEventListener("DOMContentLoaded", async () => {
         "/inochi2d-test/testplay2.inp"
       );
 
-      // -------------------------
-　　　　// 口パラメータ確認
-　　　　// -------------------------
+// -------------------------
+// 口パラメータ確認
+// -------------------------
 
-　　　　const mouthParameters: string[] = [];
+const parameterNames =
+  controller.getParameterNames();
 
-      
-      // -------------------------
-      // 口パラメータ表示
-      // -------------------------
+const mouthParameters =
+  parameterNames.filter(
+    (id: string) =>
+      /mouth|lip|jaw/i.test(id)
+  );
+
+// -------------------------
+// 口パラメータ表示
+// -------------------------
+
+if (mouthParameters.length > 0) {
+  show(
+    "MODEL LOADED!\n\n" +
+    "口関連パラメータ:\n\n" +
+    mouthParameters.join("\n") +
+    "\n\n" +
+    "RESIZE..."
+  );
+} else {
+  show(
+    "MODEL LOADED!\n\n" +
+    "口関連パラメータ:\n\n" +
+    "見つかりません\n\n" +
+    "RESIZE..."
+  );
+}
 
       if (mouthParameters.length > 0) {
         show(
