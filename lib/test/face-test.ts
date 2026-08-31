@@ -1,4 +1,5 @@
 import { createInochi2DController } from "./inochi_bridge.js";
+
 declare global {
   interface Window {
     mediapipeTest?: {
@@ -7,178 +8,251 @@ declare global {
     };
   }
 }
+
 window.addEventListener("DOMContentLoaded", async () => {
   const videoElement = document.getElementById("face-camera");
   const infoElement = document.getElementById("tracking-info");
   const homeElement = document.getElementById("home");
   const startButtonElement = document.getElementById("start-button");
   const canvasElement = document.getElementById("app");
+
+  // -------------------------
+  // HTML確認
+  // -------------------------
+
   if (!(videoElement instanceof HTMLVideoElement)) {
     document.body.innerHTML = "ERROR: face-camera";
     return;
   }
+
   if (!(infoElement instanceof HTMLDivElement)) {
     document.body.innerHTML = "ERROR: tracking-info";
     return;
   }
+
   if (!(homeElement instanceof HTMLDivElement)) {
     document.body.innerHTML = "ERROR: home";
     return;
   }
+
   if (!(startButtonElement instanceof HTMLButtonElement)) {
     document.body.innerHTML = "ERROR: start-button";
     return;
   }
+
   if (!(canvasElement instanceof HTMLCanvasElement)) {
     document.body.innerHTML = "ERROR: app";
     return;
   }
+
+  // -------------------------
+  // ここからnullではない
+  // -------------------------
+
   const video = videoElement;
   const info = infoElement;
   const home = homeElement;
   const startButton = startButtonElement;
   const canvas = canvasElement;
+
   function show(text: string) {
     info.textContent = text;
   }
+
+  // -------------------------
+  // 起動
+  // -------------------------
+
   async function start() {
     try {
       startButton.disabled = true;
       startButton.textContent = "起動中...";
+
       show("CAMERA STARTING...");
+
       // -------------------------
       // カメラ起動
       // -------------------------
+
       const stream =
         await navigator.mediaDevices.getUserMedia({
           video: {
             facingMode: "user",
-            width: { ideal: 640 },
-            height: { ideal: 480 },
+            width: {
+              ideal: 640,
+            },
+            height: {
+              ideal: 480,
+            },
           },
           audio: false,
         });
+
       video.srcObject = stream;
+
       await video.play();
+
       video.style.display = "block";
       home.style.display = "none";
       info.style.display = "block";
+
       show(
         "CAMERA OK\n\n" +
-        "INOKI2D INITIALIZING..."
+        "INOCHI2D INITIALIZING..."
       );
+
       // -------------------------
       // Inochi2D初期化
       // -------------------------
+
       const controller =
         await createInochi2DController({
           wasmUrl:
             "/inochi2d-test/inochi2d_bg.wasm",
           debug: true,
         });
+
       show(
         "CAMERA OK\n\n" +
-        "INOKI2D INITIALIZED\n\n" +
+        "INOCHI2D INITIALIZED\n\n" +
         "MOUNTING..."
       );
+
       // -------------------------
       // Canvas設定
       // -------------------------
+
       canvas.style.position = "fixed";
       canvas.style.inset = "0";
       canvas.style.width = "100%";
       canvas.style.height = "100%";
       canvas.style.zIndex = "1";
+
       // -------------------------
       // Inochi2DをCanvasへ接続
       // -------------------------
+
       await controller.mount(canvas);
+
       show(
         "CAMERA OK\n\n" +
-        "INOKI2D MOUNT OK\n\n" +
+        "INOCHI2D MOUNT OK\n\n" +
         "MODEL LOADING..."
       );
+
       // -------------------------
       // モデル読み込み
       // -------------------------
+
       await controller.loadModel(
         "/inochi2d-test/testplay2.inp"
       );
-      // -------------------------
-      // 口パラメータ確認
-      // -------------------------
-      const debugState = controller.getDebugState();
 
-　　　　const scalarParameters =
+      // -------------------------
+      // デバッグ情報取得
+      // -------------------------
+
+      const debugState =
+        controller.getDebugState();
+
+      const scalarParameters =
         debugState.scalarParameterValues ?? {};
 
-　　　　const vectorParameters =
+      const vectorParameters =
         debugState.vectorParameterValues ?? {};
 
-　　　　const allParameterNames = [
+      const allParameterNames = [
         ...Object.keys(scalarParameters),
         ...Object.keys(vectorParameters),
-　　　　];
+      ];
 
-　　　　const mouthParameters =
-        allParameterNames.filter((id: string) =>
-        /mouth|lip|jaw/i.test(id)
-　　  );
+      // -------------------------
+      // 口関連パラメータ検索
+      // -------------------------
 
-　　　　show(
-　　　  "MODEL LOADED!\n\n" +
-　　　  "口関連パラメータ:\n" +
-　　　  (
-        mouthParameters.length > 0
-        ? mouthParameters.join("\n")
-        : "見つかりません"
-       )
-　　　);
-      
+      const mouthParameters =
+        allParameterNames.filter(
+          (id: string) =>
+            /mouth|lip|jaw/i.test(id)
+        );
+
+      // -------------------------
+      // 口パラメータ表示
+      // -------------------------
+
+      if (mouthParameters.length > 0) {
+        show(
+          "MODEL LOADED!\n\n" +
+          "口関連パラメータ:\n\n" +
+          mouthParameters.join("\n") +
+          "\n\n" +
+          "RESIZE..."
+        );
+      } else {
+        show(
+          "MODEL LOADED!\n\n" +
+          "口関連パラメータ:\n\n" +
+          "見つかりません\n\n" +
+          "RESIZE..."
+        );
+      }
+
       // -------------------------
       // サイズ調整
       // -------------------------
+
       await controller.resize(
         window.innerWidth,
         window.innerHeight,
         window.devicePixelRatio
       );
+
       // -------------------------
       // カメラ位置
       // -------------------------
+
       await controller.setCameraTransform(
         0,
         0,
         0.15
       );
+
       // -------------------------
       // MediaPipe開始
       // -------------------------
+
       show(
         "MODEL LOADED!\n\n" +
-        "INOKI2D OK\n\n" +
+        "INOCHI2D OK\n\n" +
         "MEDIAPIPE INITIALIZING..."
       );
+
       const mp = window.mediapipeTest;
+
       if (!mp) {
         throw new Error(
           "MediaPipeが読み込まれていません"
         );
       }
+
       const {
         FaceLandmarker,
         FilesetResolver,
       } = mp;
+
       // -------------------------
       // MediaPipe Vision
       // -------------------------
+
       const vision =
         await FilesetResolver.forVisionTasks(
           "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.35/wasm"
         );
+
       // -------------------------
       // FaceLandmarker
       // -------------------------
+
       const faceLandmarker =
         await FaceLandmarker.createFromOptions(
           vision,
@@ -186,25 +260,34 @@ window.addEventListener("DOMContentLoaded", async () => {
             baseOptions: {
               modelAssetPath:
                 "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task",
+
               delegate: "GPU",
             },
+
             runningMode: "VIDEO",
+
             numFaces: 1,
+
             outputFaceBlendshapes: true,
           }
         );
+
       // -------------------------
       // MediaPipe OK
       // -------------------------
+
       show(
         "MODEL LOADED!\n\n" +
         "MEDIAPIPE OK\n\n" +
         "顔を認識しています..."
       );
+
       // -------------------------
       // 顔トラッキング
       // -------------------------
+
       let lastVideoTime = -1;
+
       function trackingLoop() {
         if (
           video.readyState >= 2 &&
@@ -212,66 +295,113 @@ window.addEventListener("DOMContentLoaded", async () => {
         ) {
           lastVideoTime =
             video.currentTime;
+
           const result =
             faceLandmarker.detectForVideo(
               video,
               performance.now()
             );
+
           const blendshapes =
-            result.faceBlendshapes?.[0]?.categories;
+            result.faceBlendshapes?.[0]
+              ?.categories;
+
+          // -------------------------
+          // 顔あり
+          // -------------------------
+
           if (blendshapes) {
             const jawOpen =
               blendshapes.find(
                 (item: any) =>
-                  item.categoryName === "jawOpen"
+                  item.categoryName ===
+                  "jawOpen"
               );
+
             const mouthValue =
               jawOpen?.score ?? 0;
+
             // -------------------------
             // 口パク
             // -------------------------
+
             void controller.setLipSyncValue(
               Math.min(1, mouthValue),
               {
                 immediate: true,
               }
             );
+
             show(
               "FACE TRACKING OK\n\n" +
               "口の開き: " +
               mouthValue.toFixed(3) +
               "\n\n" +
-
+              "口パラメータ:\n" +
+              (
+                mouthParameters.length > 0
+                  ? mouthParameters.join("\n")
+                  : "見つかりません"
+              )
             );
-          } else {
-            void controller.setLipSyncValue(0);
+          }
+
+          // -------------------------
+          // 顔なし
+          // -------------------------
+
+          else {
+            void controller.setLipSyncValue(
+              0,
+              {
+                immediate: true,
+              }
+            );
+
             show(
               "MEDIAPIPE OK\n\n" +
               "顔が見つかりません\n\n" +
-   
+              "口パラメータ:\n" +
+              (
+                mouthParameters.length > 0
+                  ? mouthParameters.join("\n")
+                  : "見つかりません"
+              )
             );
           }
         }
+
         requestAnimationFrame(
           trackingLoop
         );
       }
+
+      // -------------------------
+      // トラッキング開始
+      // -------------------------
+
       trackingLoop();
+
     } catch (error) {
       console.error(error);
+
       startButton.disabled = false;
       startButton.textContent =
         "カメラを起動";
+
       info.style.display = "block";
+
       show(
         "ERROR\n\n" +
         String(error)
       );
     }
   }
+
   // -------------------------
   // 起動ボタン
   // -------------------------
+
   startButton.addEventListener(
     "click",
     () => {
@@ -279,4 +409,5 @@ window.addEventListener("DOMContentLoaded", async () => {
     }
   );
 });
+
 export {};
