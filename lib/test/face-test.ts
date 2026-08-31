@@ -134,11 +134,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         : "見つかりません"
        )
 　　　);
-      show(
-        "MODEL LOADED!\n\n" +
-       
-        String(mouthParameterExists)
-      );
+      
       // -------------------------
       // サイズ調整
       // -------------------------
@@ -245,16 +241,14 @@ window.addEventListener("DOMContentLoaded", async () => {
               "口の開き: " +
               mouthValue.toFixed(3) +
               "\n\n" +
-              "Mouth:: Shape exists: " +
-              String(mouthParameterExists)
+
             );
           } else {
             void controller.setLipSyncValue(0);
             show(
               "MEDIAPIPE OK\n\n" +
               "顔が見つかりません\n\n" +
-              "Mouth:: Shape exists: " +
-              String(mouthParameterExists)
+   
             );
           }
         }
