@@ -215,7 +215,7 @@ window.addEventListener("DOMContentLoaded", async () => {
                   item.categoryName === "jawOpen"
               );
             const mouthValue =
-              jawOpen?.score ?? 0;
+             1 - (jawOpen?.score ?? 0);
             // -------------------------
             // テスト
             //
