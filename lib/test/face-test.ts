@@ -149,33 +149,12 @@ window.addEventListener("DOMContentLoaded", async () => {
       );
 
       // -------------------------
-      // デバッグ情報取得
-      // -------------------------
+　　　　// 口パラメータ確認
+　　　　// -------------------------
 
-      const debugState =
-        controller.getDebugState();
+　　　　const mouthParameters: string[] = [];
 
-      const scalarParameters =
-        debugState.scalarParameterValues ?? {};
-
-      const vectorParameters =
-        debugState.vectorParameterValues ?? {};
-
-      const allParameterNames = [
-        ...Object.keys(scalarParameters),
-        ...Object.keys(vectorParameters),
-      ];
-
-      // -------------------------
-      // 口関連パラメータ検索
-      // -------------------------
-
-      const mouthParameters =
-        allParameterNames.filter(
-          (id: string) =>
-            /mouth|lip|jaw/i.test(id)
-        );
-
+      
       // -------------------------
       // 口パラメータ表示
       // -------------------------
