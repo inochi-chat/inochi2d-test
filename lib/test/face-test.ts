@@ -92,6 +92,10 @@ window.addEventListener("DOMContentLoaded", async () => {
       await controller.loadModel(
         "/inochi2d-test/testplay2.inp"
       );
+      console.log(
+　　　  "MOUTH PARAMETER:",
+　　　  controller.getDebugState()
+　　　　);
       await controller.resize(
         window.innerWidth,
         window.innerHeight,
