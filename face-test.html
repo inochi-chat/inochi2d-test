@@ -56,11 +56,19 @@
   </style>
 </head>
 <body>
-  <div id="home">
+    <div id="home">
     <h1>Inochi Face Tracking</h1>
     <p>iPhoneのカメラで顔の動きをテストします</p>
     <button id="start-button">カメラを起動</button>
   </div>
+
+  <video
+    id="face-camera"
+    autoplay
+    playsinline
+    muted
+  ></video>
+
   <div id="tracking-info">STARTING...</div>
   <script type="module" src="/lib/test/face-test.ts"></script>
 </body>
