@@ -170,8 +170,11 @@ window.addEventListener("DOMContentLoaded", async () => {
             const mouthValue =
               jawOpen?.score ?? 0;
             void controller.setLipSyncValue(
-              Math.min(1, mouthValue)
-            );
+            Math.min(1, mouthValue),
+          {
+            immediate: true
+          }
+　　　　　);
             show(
               "FACE TRACKING OK\n\n" +
               "口の開き: " +
