@@ -108,11 +108,35 @@ window.addEventListener("DOMContentLoaded", async () => {
       // 口パラメータ確認
       // -------------------------
       const debugState = controller.getDebugState();
-      const mouthParameterExists =
-        debugState.canvasDataset?.inochi2dMouthShapeExists;
+
+　　　　const scalarParameters =
+        debugState.scalarParameterValues ?? {};
+
+　　　　const vectorParameters =
+        debugState.vectorParameterValues ?? {};
+
+　　　　const allParameterNames = [
+        ...Object.keys(scalarParameters),
+        ...Object.keys(vectorParameters),
+　　　　];
+
+　　　　const mouthParameters =
+        allParameterNames.filter((id: string) =>
+        /mouth|lip|jaw/i.test(id)
+　　  );
+
+　　　　show(
+　　　  "MODEL LOADED!\n\n" +
+　　　  "口関連パラメータ:\n" +
+　　　  (
+        mouthParameters.length > 0
+        ? mouthParameters.join("\n")
+        : "見つかりません"
+       )
+　　　);
       show(
         "MODEL LOADED!\n\n" +
-        "Mouth:: Shape exists: " +
+       
         String(mouthParameterExists)
       );
       // -------------------------
