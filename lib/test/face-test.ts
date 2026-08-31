@@ -1,101 +1,38 @@
 import { createInochi2DController } from "./inochi_bridge.js";
+declare global {
+  interface Window {
+    mediapipeTest?: {
+      FaceLandmarker: any;
+      FilesetResolver: any;
+    };
+  }
+}
 window.addEventListener("DOMContentLoaded", async () => {
-  const videoElement = document.getElementById(
-    "face-camera"
-  );
-  const infoElement = document.getElementById(
-    "tracking-info"
-  );
-  const homeElement = document.getElementById(
-    "home"
-  );
-  const startButtonElement = document.getElementById(
-    "start-button"
-  );
-  const canvasElement = document.getElementById(
-    "app"
-  );
-  // -------------------------
-  // HTML確認
-  // -------------------------
+  const videoElement = document.getElementById("face-camera");
+  const infoElement = document.getElementById("tracking-info");
+  const homeElement = document.getElementById("home");
+  const startButtonElement = document.getElementById("start-button");
+  const canvasElement = document.getElementById("app");
   if (!(videoElement instanceof HTMLVideoElement)) {
-    document.body.innerHTML = `
-      <div style="
-        color:white;
-        background:#111;
-        padding:30px;
-        font-family:monospace;
-      ">
-        ERROR<br><br>
-        HTML ELEMENT NOT FOUND<br><br>
-        Missing: face-camera
-      </div>
-    `;
+    document.body.innerHTML = "ERROR: face-camera";
     return;
   }
   if (!(infoElement instanceof HTMLDivElement)) {
-    document.body.innerHTML = `
-      <div style="
-        color:white;
-        background:#111;
-        padding:30px;
-        font-family:monospace;
-      ">
-        ERROR<br><br>
-        HTML ELEMENT NOT FOUND<br><br>
-        Missing: tracking-info
-      </div>
-    `;
+    document.body.innerHTML = "ERROR: tracking-info";
     return;
   }
   if (!(homeElement instanceof HTMLDivElement)) {
-    document.body.innerHTML = `
-      <div style="
-        color:white;
-        background:#111;
-        padding:30px;
-        font-family:monospace;
-      ">
-        ERROR<br><br>
-        HTML ELEMENT NOT FOUND<br><br>
-        Missing: home
-      </div>
-    `;
+    document.body.innerHTML = "ERROR: home";
     return;
   }
   if (!(startButtonElement instanceof HTMLButtonElement)) {
-    document.body.innerHTML = `
-      <div style="
-        color:white;
-        background:#111;
-        padding:30px;
-        font-family:monospace;
-      ">
-        ERROR<br><br>
-        HTML ELEMENT NOT FOUND<br><br>
-        Missing: start-button
-      </div>
-    `;
+    document.body.innerHTML = "ERROR: start-button";
     return;
   }
   if (!(canvasElement instanceof HTMLCanvasElement)) {
-    document.body.innerHTML = `
-      <div style="
-        color:white;
-        background:#111;
-        padding:30px;
-        font-family:monospace;
-      ">
-        ERROR<br><br>
-        HTML ELEMENT NOT FOUND<br><br>
-        Missing: app
-      </div>
-    `;
+    document.body.innerHTML = "ERROR: app";
     return;
   }
-  // -------------------------
-  // ここからnullではない
-  // -------------------------
   const video = videoElement;
   const info = infoElement;
   const home = homeElement;
@@ -104,35 +41,22 @@ window.addEventListener("DOMContentLoaded", async () => {
   function show(text: string) {
     info.textContent = text;
   }
-  // -------------------------
-  // カメラ＋Inochi2D起動
-  // -------------------------
   async function start() {
     try {
       startButton.disabled = true;
       startButton.textContent = "起動中...";
       show("CAMERA STARTING...");
-      // -------------------------
-      // カメラ起動
-      // -------------------------
       const stream =
         await navigator.mediaDevices.getUserMedia({
           video: {
             facingMode: "user",
-            width: {
-              ideal: 640,
-            },
-            height: {
-              ideal: 480,
-            },
+            width: { ideal: 640 },
+            height: { ideal: 480 },
           },
           audio: false,
         });
       video.srcObject = stream;
       await video.play();
-      // -------------------------
-      // カメラ表示
-      // -------------------------
       video.style.display = "block";
       home.style.display = "none";
       info.style.display = "block";
@@ -141,7 +65,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         "INOKI2D INITIALIZING..."
       );
       // -------------------------
-      // Inochi2D初期化
+      // Inochi2D
       // -------------------------
       const controller =
         await createInochi2DController({
@@ -154,56 +78,118 @@ window.addEventListener("DOMContentLoaded", async () => {
         "INOKI2D INITIALIZED\n\n" +
         "MOUNTING..."
       );
-      // -------------------------
-      // Canvas設定
-      // -------------------------
       canvas.style.position = "fixed";
       canvas.style.inset = "0";
       canvas.style.width = "100%";
       canvas.style.height = "100%";
       canvas.style.zIndex = "1";
-      // -------------------------
-      // Inochi2DをCanvasへ接続
-      // -------------------------
       await controller.mount(canvas);
       show(
         "CAMERA OK\n\n" +
         "INOKI2D MOUNT OK\n\n" +
         "MODEL LOADING..."
       );
-      // -------------------------
-      // モデル読み込み
-      // -------------------------
       await controller.loadModel(
         "/inochi2d-test/testplay2.inp"
       );
-      // -------------------------
-      // サイズ調整
-      // -------------------------
       await controller.resize(
         window.innerWidth,
         window.innerHeight,
         window.devicePixelRatio
       );
-      // -------------------------
-      // カメラ位置
-      // -------------------------
       await controller.setCameraTransform(
         0,
         0,
         0.15
       );
-      // -------------------------
-      // 完了
-      // -------------------------
       show(
         "MODEL LOADED!\n\n" +
         "CAMERA OK\n" +
         "INOKI2D OK\n\n" +
-        "顔トラッキング接続待ち"
+        "MEDIAPIPE INITIALIZING..."
       );
+      // -------------------------
+      // MediaPipe
+      // -------------------------
+      const mp = window.mediapipeTest;
+      if (!mp) {
+        throw new Error(
+          "MediaPipeが読み込まれていません"
+        );
+      }
+      const {
+        FaceLandmarker,
+        FilesetResolver,
+      } = mp;
+      const vision =
+        await FilesetResolver.forVisionTasks(
+          "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.35/wasm"
+        );
+      const faceLandmarker =
+        await FaceLandmarker.createFromOptions(
+          vision,
+          {
+            baseOptions: {
+              modelAssetPath:
+                "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task",
+              delegate: "GPU",
+            },
+            runningMode: "VIDEO",
+            numFaces: 1,
+            outputFaceBlendshapes: true,
+          }
+        );
+      show(
+        "MODEL LOADED!\n\n" +
+        "MEDIAPIPE OK\n\n" +
+        "顔を認識しています..."
+      );
+      // -------------------------
+      // 顔トラッキング
+      // -------------------------
+      let lastVideoTime = -1;
+      function trackingLoop() {
+        if (
+          video.readyState >= 2 &&
+          video.currentTime !== lastVideoTime
+        ) {
+          lastVideoTime = video.currentTime;
+          const result =
+            faceLandmarker.detectForVideo(
+              video,
+              performance.now()
+            );
+          const blendshapes =
+            result.faceBlendshapes?.[0]?.categories;
+          if (blendshapes) {
+            const jawOpen =
+              blendshapes.find(
+                (item: any) =>
+                  item.categoryName === "jawOpen"
+              );
+            const mouthValue =
+              jawOpen?.score ?? 0;
+            void controller.setLipSyncValue(
+              Math.min(1, mouthValue)
+            );
+            show(
+              "FACE TRACKING OK\n\n" +
+              "口の開き: " +
+              mouthValue.toFixed(3)
+            );
+          } else {
+            void controller.setLipSyncValue(0);
+            show(
+              "MEDIAPIPE OK\n\n" +
+              "顔が見つかりません"
+            );
+          }
+        }
+        requestAnimationFrame(trackingLoop);
+      }
+      trackingLoop();
       console.log(
-        "Inochi2D Controller:",
+        "Face tracking started",
         controller
       );
     } catch (error) {
