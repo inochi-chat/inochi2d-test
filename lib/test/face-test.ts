@@ -46,7 +46,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   }
 
   // -------------------------
-  // ここからnullではない
+  // nullではない
   // -------------------------
 
   const video = videoElement;
@@ -71,7 +71,7 @@ window.addEventListener("DOMContentLoaded", async () => {
       show("CAMERA STARTING...");
 
       // -------------------------
-      // カメラ起動
+      // カメラ
       // -------------------------
 
       const stream =
@@ -102,7 +102,7 @@ window.addEventListener("DOMContentLoaded", async () => {
       );
 
       // -------------------------
-      // Inochi2D初期化
+      // Inochi2D
       // -------------------------
 
       const controller =
@@ -119,7 +119,7 @@ window.addEventListener("DOMContentLoaded", async () => {
       );
 
       // -------------------------
-      // Canvas設定
+      // Canvas
       // -------------------------
 
       canvas.style.position = "fixed";
@@ -129,7 +129,7 @@ window.addEventListener("DOMContentLoaded", async () => {
       canvas.style.zIndex = "1";
 
       // -------------------------
-      // Inochi2DをCanvasへ接続
+      // Mount
       // -------------------------
 
       await controller.mount(canvas);
@@ -141,91 +141,46 @@ window.addEventListener("DOMContentLoaded", async () => {
       );
 
       // -------------------------
-      // モデル読み込み
+      // モデル
       // -------------------------
 
       await controller.loadModel(
         "/inochi2d-test/testplay2.inp"
       );
 
-　　　　// -------------------------
-　　　　// パラメータ確認
-　　　　// -------------------------
+      // -------------------------
+      // パラメータ確認
+      // -------------------------
 
-　　　　const parameterDebugInfo =
+      const parameterDebugInfo =
         controller.getParameterDebugInfo();
 
-　　　　const mouthParameters =
-　　　　  parameterDebugInfo.map(
-　　　　    (parameter: any) =>
-            `${parameter.id} | Vec2:${parameter.isVec2} | ` +
+      const parameterLines: string[] =
+        parameterDebugInfo.map(
+          (parameter: any) =>
+            `${parameter.id} | ` +
+            `Vec2:${parameter.isVec2} | ` +
             `default:${parameter.defaultValue.join(",")}`
-　　　  );
-　　　　　const mouthParameters =
-        parameterNames;
-
-　　　　// -------------------------
-　　　　// パラメータ表示
-　　　　// -------------------------
-
-　　　　if (mouthParameters.length > 0) {
-　　　　  show(
-         "MODEL LOADED!\n\n" +
-         "モデルのパラメータ:\n\n" +
-         mouthParameters.join("\n") +
-　　　    "\n\n" +
-         "RESIZE..."
-      );
-
-　　　　} else {
-
-　　　　  show(
-　　　　    "MODEL LOADED!\n\n" +
-          "モデルのパラメータ:\n\n" +
-          "本当に0個です\n\n" +
-          "RESIZE..."
-       );
-     }
-// -------------------------
-// 口パラメータ表示
-// -------------------------
-
-if (mouthParameters.length > 0) {
-  show(
-    "MODEL LOADED!\n\n" +
-    "口関連パラメータ:\n\n" +
-    mouthParameters.join("\n") +
-    "\n\n" +
-    "RESIZE..."
-  );
-} else {
-  show(
-    "MODEL LOADED!\n\n" +
-    "口関連パラメータ:\n\n" +
-    "見つかりません\n\n" +
-    "RESIZE..."
-  );
-}
-
-      if (mouthParameters.length > 0) {
-        show(
-          "MODEL LOADED!\n\n" +
-          "口関連パラメータ:\n\n" +
-          mouthParameters.join("\n") +
-          "\n\n" +
-          "RESIZE..."
         );
-      } else {
-        show(
-          "MODEL LOADED!\n\n" +
-          "口関連パラメータ:\n\n" +
-          "見つかりません\n\n" +
-          "RESIZE..."
-        );
-      }
 
       // -------------------------
-      // サイズ調整
+      // パラメータ表示
+      // -------------------------
+
+      show(
+        "MODEL LOADED!\n\n" +
+        "モデルパラメータ:\n\n" +
+        (
+          parameterLines.length > 0
+            ? parameterLines.join("\n")
+            : "パラメータなし"
+        ) +
+        "\n\n" +
+        "RESIZE..."
+      );
+
+      // -------------------------
+      // サイズ
       // -------------------------
 
       await controller.resize(
@@ -235,7 +190,7 @@ if (mouthParameters.length > 0) {
       );
 
       // -------------------------
-      // カメラ位置
+      // カメラ
       // -------------------------
 
       await controller.setCameraTransform(
@@ -245,7 +200,7 @@ if (mouthParameters.length > 0) {
       );
 
       // -------------------------
-      // MediaPipe開始
+      // MediaPipe
       // -------------------------
 
       show(
@@ -268,7 +223,7 @@ if (mouthParameters.length > 0) {
       } = mp;
 
       // -------------------------
-      // MediaPipe Vision
+      // Vision
       // -------------------------
 
       const vision =
@@ -364,12 +319,8 @@ if (mouthParameters.length > 0) {
               "口の開き: " +
               mouthValue.toFixed(3) +
               "\n\n" +
-              "口パラメータ:\n" +
-              (
-                mouthParameters.length > 0
-                  ? mouthParameters.join("\n")
-                  : "見つかりません"
-              )
+              "パラメータ:\n" +
+              parameterLines.join("\n")
             );
           }
 
@@ -388,12 +339,8 @@ if (mouthParameters.length > 0) {
             show(
               "MEDIAPIPE OK\n\n" +
               "顔が見つかりません\n\n" +
-              "口パラメータ:\n" +
-              (
-                mouthParameters.length > 0
-                  ? mouthParameters.join("\n")
-                  : "見つかりません"
-              )
+              "パラメータ:\n" +
+              parameterLines.join("\n")
             );
           }
         }
@@ -426,7 +373,7 @@ if (mouthParameters.length > 0) {
   }
 
   // -------------------------
-  // 起動ボタン
+  // ボタン
   // -------------------------
 
   startButton.addEventListener(
