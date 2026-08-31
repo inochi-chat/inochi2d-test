@@ -56,33 +56,24 @@
   </style>
 </head>
 <body>
-    <div id="home">
+  <div id="home">
     <h1>Inochi Face Tracking</h1>
     <p>iPhoneのカメラで顔の動きをテストします</p>
     <button id="start-button">カメラを起動</button>
   </div>
-
   <video
     id="face-camera"
     autoplay
     playsinline
     muted
   ></video>
-
-  <div id="tracking-info">STARTING...</div>
-
-　　<script type="module">
-  import {
-    FaceLandmarker,
-    FilesetResolver
-  } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.35/vision_bundle.mjs";
-
-  window.mediapipeTest = {
-    FaceLandmarker,
-    FilesetResolver
-  };
-</script>
-  
-<script type="module" src="/lib/test/face-test.ts"></script>
+  <canvas id="app"></canvas>
+  <div id="tracking-info">
+    STARTING...
+  </div>
+  <script
+    type="module"
+    src="/lib/test/face-test.ts"
+  ></script>
 </body>
 </html>
