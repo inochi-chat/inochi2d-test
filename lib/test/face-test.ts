@@ -152,11 +152,17 @@ window.addEventListener("DOMContentLoaded", async () => {
 　　　　// パラメータ確認
 　　　　// -------------------------
 
-　　　　const parameterNames =
-        controller.getParameterNames();
+　　　　const parameterDebugInfo =
+        controller.getParameterDebugInfo();
 
 　　　　const mouthParameters =
-       parameterNames;
+　　　　  parameterDebugInfo.map(
+　　　　    (parameter: any) =>
+            `${parameter.id} | Vec2:${parameter.isVec2} | ` +
+            `default:${parameter.defaultValue.join(",")}`
+　　　  );
+　　　　　const mouthParameters =
+        parameterNames;
 
 　　　　// -------------------------
 　　　　// パラメータ表示
