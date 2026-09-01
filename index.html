@@ -1,24 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Inochi2D example</title>
-  </head>
-  <body>
-    <video
-      id="face-camera"
-      autoplay
-      playsinline
-      muted
-      style="display: none;"
-    ></video>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inochi2D test NEW</title>
+</head>
+<body>
 
-    <canvas id="app"></canvas>
+  <video
+    id="face-camera"
+    autoplay
+    playsinline
+    muted
+    style="display:none;"
+  ></video>
 
-    <script
-      type="module"
-      src="/lib/test/test-new.ts"
-    ></script>
-  </body>
+  <canvas id="app"></canvas>
+
+  <div id="home">
+    <button id="start-button">カメラを起動</button>
+  </div>
+
+  <div
+    id="tracking-info"
+    style="
+      display:none;
+      white-space:pre-wrap;
+      color:white;
+      background:#111;
+      padding:15px;
+      font-family:monospace;
+    "
+  ></div>
+
+  <script
+    type="module"
+    src="/lib/test/test-new.ts"
+  ></script>
+
+</body>
 </html>
