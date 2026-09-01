@@ -1,9 +1,13 @@
-import createInochi2DController from “./inochi_bridge_new.js”;
+import createInochi2DController from "./inochi_bridge_new.js";
 
-window.addEventListener(“DOMContentLoaded”, async () => {
-const canvas = document.getElementById(
-“app”
-) as HTMLCanvasElement;
+window.addEventListener("DOMContentLoaded", async () => {
+  const canvas = document.getElementById(
+    "app"
+  ) as HTMLCanvasElement;
+
+  const video = document.getElementById(
+    "face-camera"
+  ) as HTMLVideoElement;
 
 const video = document.getElementById(
 “face-camera”
