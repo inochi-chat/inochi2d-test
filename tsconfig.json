@@ -16,5 +16,6 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false
   },
-  "include": ["src", "lib"]
+  "include": ["src", "lib"],
+  "exclude": ["lib/test"]
 }
