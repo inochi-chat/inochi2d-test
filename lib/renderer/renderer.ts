@@ -21,16 +21,25 @@ export const blend_modes = [
 ];
 
 // Function to recursively add nodes to the scene
-function createNode(node: Node | Drawable, scene: THREE.Object3D, parent: THREE.Object3D, textures: THREE.Texture[]) {
+function createNode(
+    node: Node | Drawable,
+    scene: THREE.Object3D,
+    parent: THREE.Object3D,
+    textures: THREE.Texture[]
+) {
+    console.log("CREATE NODE:", node.type, node.name, node.uuid);
+
     node.create();
     node.update();
+
+    console.log("THREE OBJ:", node.threeObj);
+
     parent.add(node.threeObj);
 
-    // Process child nodes
     for (let child of node.children) {
         createNode(child, scene, node.threeObj, textures);
     }
-        
+
     return node.threeObj;
 }
 
