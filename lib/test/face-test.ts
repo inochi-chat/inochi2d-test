@@ -1,4 +1,4 @@
-import { createInochi2DController } from "./inochi_bridge.js";
+import { createInochi2DController } from "./inochi_bridge_new.js";
 declare global {
   interface Window {
     mediapipeTest?: {
