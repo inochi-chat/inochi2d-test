@@ -186,22 +186,7 @@ export function renderPuppet(
     );
 
     scene.add(rootNode);
-    rootNode.traverse((obj: any) => {
-    if (obj instanceof THREE.Mesh) {
-        obj.frustumCulled = false;
-
-        const material = obj.material as THREE.MeshBasicMaterial;
-
-        material.depthTest = false;
-        material.depthWrite = false;
-        material.stencilWrite = false;
-
-        material.map = null;
-        material.color.set(0xff00ff);
-        material.needsUpdate = true;
-     }
-　});
-
+    
 
     const animate = function () {
         requestAnimationFrame(animate);
