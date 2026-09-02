@@ -20,6 +20,7 @@ const camera = new THREE.OrthographicCamera(
 console.log("CAMERA:", camera.left, camera.right, camera.top, camera.bottom, camera.position.z);
 
 camera.position.set(0, 7001, 500);
+camera.lookAt(94, 7001, 0);
 
 const renderer = new THREE.WebGLRenderer({
     antialias: true
