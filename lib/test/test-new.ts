@@ -44,11 +44,21 @@ async function loadPuppet() {
     if (object instanceof THREE.Mesh) {
         
 
+        result.rootNode.traverse((object) => {
+    if (object instanceof THREE.Mesh) {
+        object.material =
+            new THREE.MeshBasicMaterial({
+                color: 0xff00ff,
+                depthTest: false,
+                depthWrite: false,
+                side: THREE.DoubleSide
+            });
+
         object.frustumCulled = false;
         object.renderOrder = 999;
-      
     }
 });
+      
             console.log("AFTER RENDER");
             let meshCount = 0;
 
