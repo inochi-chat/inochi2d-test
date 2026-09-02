@@ -67,7 +67,7 @@ export function deserializePuppet(json: any, textures: Texture[]): Puppet {
 	puppet.meta = json.meta;
 	puppet.textures = textures;
 	puppet.rootNode = deserializeNode(puppet, json.nodes);
-	puppet.rootNode.transform.scale.y *= -1; // Weird rotation moment!
+	//puppet.rootNode.transform.scale.y *= -1; // Weird rotation moment!
 	puppet.rootNode.update();
 	return puppet;
 }
