@@ -75,7 +75,7 @@ export class Drawable extends Node {
             if (!this.enabled) {
                 this.threeObj.material.opacity = 0;
             }
-            this.threeObj.material.alphaTest = 0.7;
+            this.threeObj.material.alphaTest = 0;
         }
         super.onCreateMaterials();
     }
