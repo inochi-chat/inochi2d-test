@@ -32,35 +32,29 @@ document.body.appendChild(renderer.domElement);
 
 async function loadPuppet() {
     try {
-        const puppet = await Inochi2D.INP.inImportFromURL('testplay2.inp');
+        const puppet = await Inochi2D.INP.inImportFromURL('model.inp');
 
         console.log("PUPPET LOADED");
-　　　　　console.log(puppet);
-　　　　　console.log("NODE COUNT:", puppet.nodes.length);
-　　　　　console.log("ROOT NODE:", puppet.rootNode);
-
-puppet.nodes.forEach((node) => {
-    console.log(
-        "NODE:",
-        node.type,
-        node.name,
-        node.uuid,
-        node.children.length
-    );
-});
+        console.log(puppet);
 
         console.log("BEFORE RENDER");
 
-　　try {
-        Inochi2D.Renderer.renderPuppet(
-        puppet,
-        scene,
-        camera,
-        renderer
-       );
-        console.log("AFTER RENDER");
-　　　} catch (error) {
-        console.error("RENDER ERROR:", error);
-　　　}
+        try {
+            Inochi2D.Renderer.renderPuppet(
+                puppet,
+                scene,
+                camera,
+                renderer
+            );
+
+            console.log("AFTER RENDER");
+        } catch (error) {
+            console.error("RENDER ERROR:", error);
+        }
+
+    } catch (error) {
+        console.error("PUPPET LOAD ERROR", error);
+    }
+}
 
 loadPuppet();
