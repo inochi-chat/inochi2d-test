@@ -23,6 +23,8 @@ const renderer = new THREE.WebGLRenderer({
     antialias: true
 });
 
+console.log("CANVAS:", renderer.domElement.width, renderer.domElement.height);
+
 renderer.setSize(
     window.innerWidth,
     window.innerHeight
