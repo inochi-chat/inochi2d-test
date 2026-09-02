@@ -2,7 +2,7 @@ import * as Inochi2D from '../main'
 import * as THREE from 'three';
 const scene = new THREE.Scene();
 const aspectRatio = window.innerWidth / window.innerHeight;
-const cameraWidth = 7000;
+const cameraWidth = 14000;
 const cameraHeight = cameraWidth / aspectRatio;
 const camera = new THREE.OrthographicCamera(
     cameraWidth / -2,
