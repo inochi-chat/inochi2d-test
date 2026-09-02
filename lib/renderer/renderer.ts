@@ -126,11 +126,7 @@ console.log("MESH MATERIAL:", mesh.material);
     
     console.log("ROOT POSITION:", rootNode.position, "SCALE:", scene.add(rootNode);
 
-rootNode.visible = true;
-
-rootNode.traverse((obj: any) => {
-    obj.visible = true;
-});
+scene.add(rootNode);
 
 const animate = function () {
     requestAnimationFrame(animate);
