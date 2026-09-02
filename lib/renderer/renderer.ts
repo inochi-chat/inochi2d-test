@@ -121,10 +121,9 @@ console.log(
 );
 console.log("MESH GEOMETRY:", mesh.geometry);
 console.log("MESH MATERIAL:", mesh.material);
-　　　console.log("ROOT CHILDREN:", rootNode.children.length);
-　　　console.log("SCENE CHILDREN:", scene.children.length);
-    
-    console.log("ROOT POSITION:", rootNode.position, "SCALE:", scene.add(rootNode);
+console.log("ROOT CHILDREN:", rootNode.children.length);
+console.log("SCENE CHILDREN:", scene.children.length);
+console.log("ROOT POSITION:", rootNode.position, "SCALE:", scene.add(rootNode);
 
 scene.add(rootNode);
 
