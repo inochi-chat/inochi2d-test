@@ -42,15 +42,17 @@ function createNode(
 
 // Function to render a Puppet
 export function renderPuppet(puppet: Puppet, scene: THREE.Scene, camera: THREE.Camera, renderer: THREE.Renderer) {
-    console.log("RENDER PUPPET ENTER");
+console.log("RENDER PUPPET ENTER");
 
-    // Process root node
-    let rootNode = createNode(puppet.rootNode, scene, scene, puppet.textures);
-　　　console.log(
+let rootNode = createNode(puppet.rootNode, scene, scene, puppet.textures);
+
+rootNode.updateMatrixWorld(true);
+
+console.log(
     "FIRST CHILD:",
     rootNode.children[0]?.type,
     rootNode.children[0]?.children.length
-　　);
+);
     console.log("ROOT OBJ TYPE:", rootNode.type);
 　　　console.log("ROOT OBJ CHILDREN:", rootNode.children.length);
 　　　console.log(
