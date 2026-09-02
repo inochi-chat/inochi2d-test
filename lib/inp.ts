@@ -71,9 +71,12 @@ export async function inImport(filebuffer: Uint8Array): Promise<Puppet> {
                 textureLoads.push(
                     new Promise(async (complete, failure) => {
                         decodeTga(data, { detectAmbiguousAlphaChannel: true }).then(tga => {
-                            let texture = new THREE.DataTexture(tga.image.data, tga.image.width, tga.image.height);
-                            texture.generateMipmaps = true;
-                            texture.needsUpdate = true;
+                            let texture = new THREE.DataTexture(png.data, png.width, png.height);
+　　　　　　　　　　　　　　　　　　　texture.generateMipmaps = true;
+　　　　　　　　　　　　　　　　　　　texture.minFilter = THREE.LinearMipmapLinearFilter;
+　　　　　　　　　　　　　　　　　　　texture.magFilter = THREE.LinearFilter;
+　　　　　　　　　　　　　　　　　　　texture.needsUpdate = true;
+                            
                             complete(texture);
                         }).catch((reason) => {
                             failure(reason);
