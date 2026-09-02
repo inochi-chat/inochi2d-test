@@ -175,6 +175,7 @@ export class Part extends Drawable {
             }
             // Set the material
             this.threeObj.material = material;
+            console.log("PART MATERIAL CHECK:", material);
         }
         // Leave this last, since parent modifies this material
         super.onCreateMaterials();
