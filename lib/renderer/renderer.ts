@@ -72,6 +72,10 @@ console.log(
   mesh.scale.x,
   mesh.scale.y
 );
+console.log(
+  "MESH WORLD POS:",
+  mesh.getWorldPosition(new THREE.Vector3())
+);
 console.log("TEXTURE:", texture);
 console.log(
   "TEXTURE IMAGE:",
