@@ -87,6 +87,13 @@ console.log(
   camera.position.z
 );
 console.log(
+    "CAMERA VIEW:",
+    (camera as THREE.OrthographicCamera).left,
+    (camera as THREE.OrthographicCamera).right,
+    (camera as THREE.OrthographicCamera).top,
+    (camera as THREE.OrthographicCamera).bottom
+);
+console.log(
   "MESH VISIBLE:",
   mesh.visible,
   "FRUSTUM CULLED:",
