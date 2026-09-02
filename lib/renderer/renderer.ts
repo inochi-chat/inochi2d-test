@@ -76,6 +76,13 @@ console.log(
   "MESH WORLD POS:",
   mesh.getWorldPosition(new THREE.Vector3())
 );
+console.log(
+  "CAMERA POS:",
+  camera.position.x,
+  camera.position.y,
+  camera.position.z
+);
+    
 console.log("TEXTURE:", texture);
 console.log(
   "TEXTURE IMAGE:",
