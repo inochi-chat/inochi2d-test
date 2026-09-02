@@ -27,13 +27,10 @@ function createNode(
     parent: THREE.Object3D,
     textures: THREE.Texture[]
 ) {
-    console.log("CREATE NODE:", node.type, node.name, node.uuid);
-
+    
     node.create();
     node.update();
-
-    console.log("THREE OBJ:", node.threeObj);
-
+   
     parent.add(node.threeObj);
 
     for (let child of node.children) {
