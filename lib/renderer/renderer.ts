@@ -186,6 +186,14 @@ export function renderPuppet(
     );
 
     scene.add(rootNode);
+    rootNode.traverse((obj: any) => {
+    if (obj instanceof THREE.Mesh) {
+        obj.frustumCulled = false;
+        const material = obj.material as THREE.Material;
+        material.depthTest = false;
+        material.stencilWrite = false;
+    }
+});
 
 
     const animate = function () {
