@@ -23,7 +23,23 @@ renderer.setSize(
     window.innerWidth,
     window.innerHeight
 );
+
 document.body.appendChild(renderer.domElement);
+
+const testGeometry = new THREE.PlaneGeometry(1000, 1000);
+
+const testMaterial = new THREE.MeshBasicMaterial({
+    color: 0x00ff00
+});
+
+const testMesh = new THREE.Mesh(
+    testGeometry,
+    testMaterial
+);
+
+testMesh.position.set(0, 7001, 0);
+
+scene.add(testMesh);
 async function loadPuppet() {
     try {
         const puppet = await Inochi2D.INP.inImportFromURL('testplay2.inp');
