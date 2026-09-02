@@ -137,22 +137,22 @@ export class Part extends Drawable {
                 } else {
                     // Without a mask, assume we are the mask
                     material.depthWrite = false;
-                    material.stencilWrite = true;
-                    material.stencilRef = this.uuid; // TODO: Assign this dynamically
-                    material.stencilFunc = THREE.AlwaysStencilFunc;
-                    material.stencilZPass = THREE.ReplaceStencilOp;
-                    material.stencilFail = THREE.ReplaceStencilOp;
-                    material.stencilZFail = THREE.ReplaceStencilOp;
-                    material.stencilZPass = THREE.ReplaceStencilOp;
+                   // material.stencilWrite = true;
+                   // material.stencilRef = this.uuid; // TODO: Assign this dynamically
+                   // material.stencilFunc = THREE.AlwaysStencilFunc;
+                  //  material.stencilZPass = THREE.ReplaceStencilOp;
+                  //  material.stencilFail = THREE.ReplaceStencilOp;
+                  //  material.stencilZFail = THREE.ReplaceStencilOp;
+                  //  material.stencilZPass = THREE.ReplaceStencilOp;
                 }
 
                 // TODO: Implement blending properly
-                if (_constant != THREE.NormalBlending) {
+               // if (_constant != THREE.NormalBlending) {
                     // material.opacity = 0;
                 }
 
             } else {
-                material = new THREE.MeshBasicMaterial({ color: "pink", transparent: true, blending: _constant });
+　　　　　　　　　material = new THREE.MeshBasicMaterial({ color: "white" });
             }
 
             // Set the material
