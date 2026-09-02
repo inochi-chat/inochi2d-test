@@ -189,13 +189,15 @@ export function renderPuppet(
     
 
     const animate = function () {
-        requestAnimationFrame(animate);
+    requestAnimationFrame(animate);
 
-        renderer.render(
-            scene,
-            camera
-        );
-    };
+    renderer.setClearColor(0x00ff00);
+
+    renderer.render(
+        scene,
+        camera
+    );
+};
 
     animate();
 
