@@ -17,10 +17,7 @@ const camera = new THREE.OrthographicCamera(
     10000
 );
 
-console.log("CAMERA:", camera.left, camera.right, camera.top, camera.bottom, camera.position.z);
-
 camera.position.set(0, 7001, 500);
-camera.lookAt(94, 7001, 0);
 
 const renderer = new THREE.WebGLRenderer({
     antialias: true
@@ -30,8 +27,6 @@ renderer.setSize(
     window.innerWidth,
     window.innerHeight
 );
-
-console.log("CANVAS AFTER SIZE:", renderer.domElement.width, renderer.domElement.height);
 
 document.body.appendChild(renderer.domElement);
 
