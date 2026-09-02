@@ -47,6 +47,9 @@ export function renderPuppet(puppet: Puppet, scene: THREE.Scene, camera: THREE.C
     // Process root node
     let rootNode = createNode(puppet.rootNode, scene, scene, puppet.textures);
 
+    console.log("ROOT OBJ TYPE:", rootNode.type);
+　　　console.log("ROOT OBJ CHILDREN:", rootNode.children.length);
+
 　　　console.log("ROOT CHILDREN:", rootNode.children.length);
 　　　console.log("SCENE CHILDREN:", scene.children.length);
     
