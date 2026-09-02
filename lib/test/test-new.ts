@@ -49,12 +49,16 @@ puppet.nodes.forEach((node) => {
     );
 });
 
-        Inochi2D.Renderer.renderPuppet(
-            puppet,
-            scene,
-            camera,
-            renderer
-        );
+        console.log("BEFORE RENDER");
+
+　　　　　Inochi2D.Renderer.renderPuppet(
+         puppet,
+         scene,
+         camera,
+  　　　  renderer
+　　　　　);
+
+console.log("AFTER RENDER");
 
     } catch (error) {
         console.error("PUPPET LOAD ERROR", error);
