@@ -17,6 +17,8 @@ const camera = new THREE.OrthographicCamera(
     10000
 );
 
+console.log("CAMERA:", camera.left, camera.right, camera.top, camera.bottom, camera.position.z);
+
 camera.position.set(0, 0, 500);
 
 const renderer = new THREE.WebGLRenderer({
