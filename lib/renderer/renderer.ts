@@ -45,9 +45,8 @@ function createNode(
 
 // Function to render a Puppet
 export function renderPuppet(puppet: Puppet, scene: THREE.Scene, camera: THREE.Camera, renderer: THREE.Renderer) {
-    console.log("ROOT NODE:", puppet.rootNode);
-    console.log("NODE COUNT:", puppet.nodes.length);
-　　　console.log("RENDER PUPPET CALLED");
+    console.log("RENDER PUPPET ENTER");
+
     // Process root node
     let rootNode = createNode(puppet.rootNode, scene, scene, puppet.textures);
     scene.add(rootNode);
