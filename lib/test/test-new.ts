@@ -43,11 +43,12 @@ async function loadPuppet() {
             result.rootNode.traverse((object) => {
     if (object instanceof THREE.Mesh) {
         object.material =
-            new THREE.MeshBasicMaterial({
-                color: 0xff00ff,
-                depthTest: false,
-                depthWrite: false
-            });
+    new THREE.MeshBasicMaterial({
+        color: 0xff00ff,
+        depthTest: false,
+        depthWrite: false,
+        side: THREE.DoubleSide
+    });
 
         object.frustumCulled = false;
         object.renderOrder = 999;
