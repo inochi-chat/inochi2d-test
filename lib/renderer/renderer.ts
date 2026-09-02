@@ -61,6 +61,10 @@ export function renderPuppet(puppet: Puppet, scene: THREE.Scene, camera: THREE.C
 　  }))
 　);
     const mesh = rootNode.children[0].children[0] as THREE.Mesh;
+    console.log(
+    "MESH WORLD BOX:",
+    new THREE.Box3().setFromObject(mesh)
+);
 　　　const material = mesh.material as THREE.MeshBasicMaterial;
 　　　const texture = material.map;
 console.log(
