@@ -91,7 +91,11 @@ console.log(
 console.log(
   "GEOMETRY BOX:",
   mesh.geometry.boundingBox
-);   
+);
+console.log(
+  "POSITION COUNT:",
+  mesh.geometry.getAttribute("position")?.count
+);
 console.log("TEXTURE:", texture);
 console.log(
   "TEXTURE IMAGE:",
