@@ -23,12 +23,12 @@ const renderer = new THREE.WebGLRenderer({
     antialias: true
 });
 
-console.log("CANVAS:", renderer.domElement.width, renderer.domElement.height);
-
 renderer.setSize(
     window.innerWidth,
     window.innerHeight
 );
+
+console.log("CANVAS AFTER SIZE:", renderer.domElement.width, renderer.domElement.height);
 
 document.body.appendChild(renderer.domElement);
 
