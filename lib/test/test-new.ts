@@ -32,7 +32,7 @@ document.body.appendChild(renderer.domElement);
 
 async function loadPuppet() {
     try {
-        const puppet = await Inochi2D.INP.inImportFromURL('model.inp');
+        const puppet = await Inochi2D.INP.inImportFromURL('testplay2.inp');
 
         console.log("PUPPET LOADED");
         console.log(puppet);
