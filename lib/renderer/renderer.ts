@@ -96,6 +96,10 @@ console.log(
   "POSITION COUNT:",
   mesh.geometry.getAttribute("position")?.count
 );
+console.log(
+  "POSITION ARRAY:",
+  Array.from(mesh.geometry.getAttribute("position").array)
+);
 console.log("TEXTURE:", texture);
 console.log(
   "TEXTURE IMAGE:",
