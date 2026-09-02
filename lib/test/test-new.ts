@@ -43,6 +43,26 @@ async function loadPuppet() {
                 }
             });
             console.log("AFTER RENDER");
+            let meshCount = 0;
+
+　　　　　　　　result.rootNode.traverse((object) => {
+              if (object instanceof THREE.Mesh) {
+                  meshCount++;
+
+                  console.log(
+                           "TEST MESH",
+                            meshCount,
+                           "VISIBLE:",
+                            object.visible,
+                           "POSITION:",
+                            object.position,
+                           "WORLD:",
+                            object.getWorldPosition(new THREE.Vector3())
+                 );
+             }
+　　　　　　});
+
+　　　　　　console.log("TOTAL MESHES:", meshCount);
         } catch (error) {
             console.error("RENDER ERROR:", error);
         }
