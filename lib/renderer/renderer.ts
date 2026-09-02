@@ -117,13 +117,9 @@ console.log("MESH MATERIAL:", mesh.material);
     // Render loop
     const animate = function () {
     requestAnimationFrame(animate);
-
-    renderer.setClearColor(0xffffff, 1);
-
     renderer.render(scene, camera);
-};
-
-    animate();
+　　};
+　　　animate();
 
     return {
         rootNode: rootNode, 
