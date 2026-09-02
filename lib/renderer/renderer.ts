@@ -61,7 +61,15 @@ export function renderPuppet(puppet: Puppet, scene: THREE.Scene, camera: THREE.C
 　  }))
 　);
     const mesh = rootNode.children[0].children[0] as THREE.Mesh;
+　　　const material = mesh.material as THREE.MeshBasicMaterial;
+　　　const texture = material.map;
 
+console.log("TEXTURE:", texture);
+console.log(
+  "TEXTURE IMAGE:",
+  texture?.image?.width,
+  texture?.image?.height
+);
 console.log("MESH GEOMETRY:", mesh.geometry);
 console.log("MESH MATERIAL:", mesh.material);
 　　　console.log("ROOT CHILDREN:", rootNode.children.length);
