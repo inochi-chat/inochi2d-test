@@ -27,6 +27,7 @@ renderer.setSize(
     window.innerWidth,
     window.innerHeight
 );
+renderer.setPixelRatio(window.devicePixelRatio);
 
 renderer.setClearColor(0xff0000, 1);
 
