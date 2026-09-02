@@ -88,7 +88,10 @@ console.log(
   "FRUSTUM CULLED:",
   mesh.frustumCulled
 );    
-    
+console.log(
+  "GEOMETRY BOX:",
+  mesh.geometry.boundingBox
+);   
 console.log("TEXTURE:", texture);
 console.log(
   "TEXTURE IMAGE:",
