@@ -53,7 +53,13 @@ export function renderPuppet(puppet: Puppet, scene: THREE.Scene, camera: THREE.C
 　　);
     console.log("ROOT OBJ TYPE:", rootNode.type);
 　　　console.log("ROOT OBJ CHILDREN:", rootNode.children.length);
-
+　　　console.log(
+       "SECOND LEVEL:",
+　  rootNode.children[0].children.map((x: any) => ({
+      type: x.type,
+      children: x.children.length
+　  }))
+　);
 　　　console.log("ROOT CHILDREN:", rootNode.children.length);
 　　　console.log("SCENE CHILDREN:", scene.children.length);
     
