@@ -5,7 +5,7 @@ const scene = new THREE.Scene();
 
 const aspectRatio = window.innerWidth / window.innerHeight;
 
-const cameraWidth = 12000;
+const cameraWidth = 10000;
 const cameraHeight = cameraWidth / aspectRatio;
 
 const camera = new THREE.OrthographicCamera(
