@@ -82,6 +82,12 @@ console.log(
   camera.position.y,
   camera.position.z
 );
+console.log(
+  "MESH VISIBLE:",
+  mesh.visible,
+  "FRUSTUM CULLED:",
+  mesh.frustumCulled
+);    
     
 console.log("TEXTURE:", texture);
 console.log(
