@@ -47,6 +47,19 @@ export async function inImport(filebuffer: Uint8Array): Promise<Puppet> {
                         // Load PNG file from memory stream
                         let png = decode(data)
                         let texture = new THREE.DataTexture(png.data, png.width, png.height);
+
+                        console.log(
+                            "PNG SAMPLE:",
+                             png.data[0],
+                             png.data[1],
+                             png.data[2],
+                             png.data[3],
+                             png.data[100000],
+                             png.data[100001],
+                             png.data[100002],
+                             png.data[100003]
+　　　　　　　　　　　　　　　　);
+                        
                         texture.generateMipmaps = true;
                         texture.needsUpdate = true;
                         complete(texture);
@@ -76,6 +89,7 @@ export async function inImport(filebuffer: Uint8Array): Promise<Puppet> {
     return (async () => {
         // Wait for textures and parse puppet
         let textures = await Promise.all(textureLoads);
+        
         let puppet: Puppet = deserializePuppet(JSON.parse(parsed.payload), textures);
 
         // console.log(parsed.payload)
