@@ -180,8 +180,12 @@ export class Part extends Drawable {
             }
             // Set the material
             this.threeObj.material = material;
-            console.log("PART MATERIAL CHECK:", material);
-        }
+　　　　　　　　material.stencilWrite = false;
+　　　　　　　　material.depthTest = false;
+　　　　　　　　material.alphaTest = 0;
+　　　　　　　　material.needsUpdate = true;
+　　　　　　　　console.log("PART MATERIAL CHECK:", material);
+            }
         // Leave this last, since parent modifies this material
         super.onCreateMaterials();
     }
