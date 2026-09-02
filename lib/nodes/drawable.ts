@@ -96,6 +96,11 @@ export class Mask extends Drawable {
             material.stencilFunc = THREE.AlwaysStencilFunc;
             material.stencilZPass = THREE.ReplaceStencilOp;
             this.threeObj.material = material;
+　　　　　　　　material.stencilWrite = false;
+　　　　　　　　material.depthTest = false;
+　　　　　　　　material.alphaTest = 0;
+　　　　　　　　material.needsUpdate = true;
+　　　　　　　　console.log("PART MATERIAL CHECK:", material);
         }
         super.onCreateMaterials();
     }
