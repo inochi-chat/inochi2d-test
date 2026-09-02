@@ -44,8 +44,10 @@ export async function inImport(filebuffer: Uint8Array): Promise<Puppet> {
                             png.height
                         );
 
-                        texture.generateMipmaps = true;
-                        texture.needsUpdate = true;
+                        texture.minFilter = THREE.LinearFilter;
+　　　　　　　　　　　　　　　　texture.magFilter = THREE.LinearFilter;
+　　　　　　　　　　　　　　　　texture.generateMipmaps = true;
+　　　　　　　　　　　　　　　　texture.needsUpdate = true;
 
                         complete(texture);
                     })
