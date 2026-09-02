@@ -46,7 +46,7 @@ export async function inImport(filebuffer: Uint8Array): Promise<Puppet> {
 
                         texture.minFilter = THREE.LinearFilter;
 　　　　　　　　　　　　　　　　texture.magFilter = THREE.LinearFilter;
-　　　　　　　　　　　　　　　　texture.generateMipmaps = true;
+　　　　　　　　　　　　　　　　texture.generateMipmaps = false;
 　　　　　　　　　　　　　　　　texture.needsUpdate = true;
 
                         complete(texture);
