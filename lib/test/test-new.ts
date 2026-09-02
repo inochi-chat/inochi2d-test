@@ -52,7 +52,7 @@ async function loadPuppet() {
 
         object.frustumCulled = false;
         object.renderOrder = 999;
-        object.position.y += 1000;
+        
     }
 });
             console.log("AFTER RENDER");
