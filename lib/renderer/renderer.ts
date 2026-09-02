@@ -44,27 +44,15 @@ function createNode(
 }
 
 // Function to render a Puppet
-export function renderPuppet(
-    puppet: Puppet,
-    scene: THREE.Scene,
-    camera: THREE.Camera,
-    renderer: THREE.Renderer
-) {
-    console.log("ROOT:", puppet.rootNode);
-    console.log("NODES:", puppet.nodes);
+export function renderPuppet(puppet: Puppet, scene: THREE.Scene, camera: THREE.Camera, renderer: THREE.Renderer) {
+    console.log("ROOT NODE:", puppet.rootNode);
+    console.log("NODE COUNT:", puppet.nodes.length);
 
-    const rootNode = createNode(
-        puppet.rootNode,
-        scene,
-        scene,
-        puppet.textures
-    );
-
-    console.log("ROOT THREE:", rootNode);
-    console.log("SCENE CHILDREN:", scene.children);
-
+    // Process root node
+    let rootNode = createNode(puppet.rootNode, scene, scene, puppet.textures);
     scene.add(rootNode);
 
+    // Render loop
     const animate = function () {
         requestAnimationFrame(animate);
         renderer.render(scene, camera);
@@ -73,7 +61,7 @@ export function renderPuppet(
     animate();
 
     return {
-        rootNode,
-        animate
+        rootNode: rootNode, 
+        animate: animate
     };
 }
