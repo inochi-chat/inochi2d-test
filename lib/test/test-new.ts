@@ -65,23 +65,21 @@ function logFaceParts(node: any) {
                     new THREE.Vector3()
                 );
             console.log(
-                "FACE PART:",
-                name,
-                "UUID:",
-                node.uuid,
-                "ENABLED:",
-                node.enabled,
-                "OPACITY:",
-                (node as any).opacity,
-                "VISIBLE:",
-                node.threeObj.visible
-　　　　　　　);
-                node.uuid,
-                "WORLD:",
-                worldPosition,
-                "BOX:",
-                box
-            );
+    "FACE PART:",
+    name,
+    "UUID:",
+    node.uuid,
+    "ENABLED:",
+    node.enabled,
+    "OPACITY:",
+    (node as any).opacity,
+    "VISIBLE:",
+    node.threeObj.visible,
+    "WORLD:",
+    worldPosition,
+    "BOX:",
+    box
+);
         }
     }
     if (node.children) {
