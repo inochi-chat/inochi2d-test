@@ -105,6 +105,15 @@ async function loadPuppet() {
             "PUPPET LOADED"
         );
         console.log(
+    　　　　　"PARAM COUNT:",
+    　　　　　(puppet as any).params?.length
+　　　　　);
+
+　　　　　　console.log(
+    　　　　　"PARAMS:",
+           (puppet as any).params
+　　　　　);
+         console.log(
             "ROOT NODE KEYS:",
             Object.keys(puppet.rootNode as any)
         );
