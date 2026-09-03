@@ -136,13 +136,18 @@ debugText.style.color = "black";
 debugText.style.padding = "10px";
 debugText.style.fontSize = "16px";
 
+const firstNode =
+    (puppet as any).nodes?.[0];
+
 debugText.textContent =
     "NODES: " +
     String((puppet as any).nodes?.length) +
-    "\nFIRST NODE KEYS: " +
-    JSON.stringify(
-        Object.keys(
-            (puppet as any).nodes?.[0] || {}
+    "\nHAS PARAM: " +
+    String(
+        firstNode &&
+        Object.prototype.hasOwnProperty.call(
+            firstNode,
+            "param"
         )
     );
 document.body.appendChild(debugText);
