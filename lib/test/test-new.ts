@@ -142,14 +142,16 @@ const firstNode =
 debugText.textContent =
     "NODES: " +
     String((puppet as any).nodes?.length) +
-    "\nHAS PARAM: " +
-    String(
-        firstNode &&
-        Object.prototype.hasOwnProperty.call(
-            firstNode,
-            "param"
-        )
-    );
+    "\nNODE KEYS: " +
+    JSON.stringify(
+        Object.keys((puppet as any).nodes?.[0] || {})
+    ) +
+    "\nNODE0: " +
+    JSON.stringify(
+        (puppet as any).nodes?.[0],
+        null,
+        2
+    ).slice(0, 1500);
 document.body.appendChild(debugText);
         console.log(
             puppet
