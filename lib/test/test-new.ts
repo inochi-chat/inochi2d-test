@@ -75,22 +75,20 @@ async function loadPuppet() {
                         box.max
                     );
                     // 顔付近のMeshを目立たせるためのログ
-                    if (
-                        if (
-                              worldPosition.y < -4000 &&
-                              worldPosition.y > -10000 &&
-                              Math.abs(worldPosition.x) < 3000
-　　　　　                    )
-                    ) {
-                        console.log(
-                            "FACE AREA CANDIDATE",
-                            meshCount,
-                            "WORLD:",
-                            worldPosition,
-                            "BOX:",
-                            box
-                        );
-                    }
+　　　　　　　　　　　　　　　if (
+                          worldPosition.y < -4000 &&
+                          worldPosition.y > -10000 &&
+                          Math.abs(worldPosition.x) < 3000
+　　　　　　　　　　　　　　　) {
+                           console.log(
+                           "FACE AREA CANDIDATE",
+                           meshCount,
+                           "WORLD:",
+                           worldPosition,
+                           "BOX:",
+                           box
+                       );
+　　　　　　　　　　　　　}
                 }
             });
             console.log("TOTAL MESHES:", meshCount);
