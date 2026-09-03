@@ -76,9 +76,11 @@ async function loadPuppet() {
                     );
                     // 顔付近のMeshを目立たせるためのログ
                     if (
-                        worldPosition.y > 4000 &&
-                        worldPosition.y < 10000 &&
-                        Math.abs(worldPosition.x) < 3000
+                        if (
+                              worldPosition.y < -4000 &&
+                              worldPosition.y > -10000 &&
+                              Math.abs(worldPosition.x) < 3000
+　　　　　                    )
                     ) {
                         console.log(
                             "FACE AREA CANDIDATE",
