@@ -132,7 +132,19 @@ async function loadPuppet() {
                             object as any;
                         const oldMaterial =
                             mesh.material;
-                        
+                        mesh.material =
+                            new THREE.MeshBasicMaterial({
+      　　　　　　　　　　　　　　　　  map:
+                                    oldMaterial.map,
+                                transparent:
+                                    true,
+                                depthTest:
+                                    false,
+       　　　　　　　　　　　　　　　　 depthWrite:
+                                    false,
+                                side:
+                                     THREE.DoubleSide
+                             });
                         mesh.frustumCulled =
                             false;
                         mesh.renderOrder =
