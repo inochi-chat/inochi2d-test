@@ -132,10 +132,8 @@ async function loadPuppet() {
                                     oldMaterial.map,
                                 transparent:
                                     true,
-                                depthTest:
-                                    false,
-                                depthWrite:
-                                    false,
+                                depthTest: true,
+　　　　　　　　　　　　　　　　　　　　　depthWrite: false,
                                 side:
                                     THREE.DoubleSide
                             });
