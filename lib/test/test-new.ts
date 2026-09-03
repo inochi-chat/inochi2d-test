@@ -5,7 +5,7 @@ const scene = new THREE.Scene();
 
 const aspectRatio = window.innerWidth / window.innerHeight;
 
-const cameraWidth = 10000;
+const cameraWidth = 8000;
 const cameraHeight = cameraWidth / aspectRatio;
 
 const camera = new THREE.OrthographicCamera(
@@ -17,7 +17,7 @@ const camera = new THREE.OrthographicCamera(
     10000
 );
 
-camera.position.set(0, 0, 500);
+camera.position.set(0, -1000, 500);
 
 const renderer = new THREE.WebGLRenderer({
     antialias: true
