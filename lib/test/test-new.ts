@@ -105,8 +105,8 @@ async function loadPuppet() {
             "PUPPET LOADED"
         );
         console.log(
-            "PARAMETERS:",
-            (puppet as any).param
+           "ROOT NODE KEYS:",
+           Object.keys(puppet.rootNode as any)
 　　　　　);
         console.log(
             puppet
