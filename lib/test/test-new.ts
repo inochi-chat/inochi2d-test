@@ -133,7 +133,7 @@ async function loadPuppet() {
                                 transparent:
                                     true,
                                 depthTest: true,
-　　　　　　　　　　　　　　　　　　　　　depthWrite: false,
+　　　　　　　　　　　　　　　　　　　　　depthWrite: true,
                                 side:
                                     THREE.DoubleSide
                             });
