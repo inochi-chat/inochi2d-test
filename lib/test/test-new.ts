@@ -137,9 +137,14 @@ debugText.style.padding = "10px";
 debugText.style.fontSize = "16px";
 
 debugText.textContent =
-    "PUPPET NODES: " +
-    String((puppet as any).nodes?.length);
-
+    "NODES: " +
+    String((puppet as any).nodes?.length) +
+    "\nFIRST NODE KEYS: " +
+    JSON.stringify(
+        Object.keys(
+            (puppet as any).nodes?.[0] || {}
+        )
+    );
 document.body.appendChild(debugText);
         console.log(
             puppet
