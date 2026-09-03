@@ -69,6 +69,14 @@ function logFaceParts(node: any) {
                 name,
                 "UUID:",
                 node.uuid,
+                "ENABLED:",
+                node.enabled,
+                "OPACITY:",
+                (node as any).opacity,
+                "VISIBLE:",
+                node.threeObj.visible
+　　　　　　　);
+                node.uuid,
                 "WORLD:",
                 worldPosition,
                 "BOX:",
