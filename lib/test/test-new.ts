@@ -105,6 +105,10 @@ async function loadPuppet() {
             "PUPPET LOADED"
         );
         console.log(
+            "PARAMETERS:",
+            (puppet as any).param
+　　　　　);
+        console.log(
             puppet
         );
         console.log(
