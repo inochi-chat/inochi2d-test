@@ -54,43 +54,41 @@ async function loadPuppet() {
             });
             let meshCount = 0;
             result.rootNode.traverse((object) => {
-                if (object instanceof THREE.Mesh) {
-                    meshCount++;
-                    const worldPosition =
-                        object.getWorldPosition(
-                            new THREE.Vector3()
-                        );
-                    const box =
-                        new THREE.Box3().setFromObject(object);
-                    console.log(
-                        "TEST MESH",
-                        meshCount,
-                        "VISIBLE:",
-                        object.visible,
-                        "WORLD:",
-                        worldPosition,
-                        "BOX MIN:",
-                        box.min,
-                        "BOX MAX:",
-                        box.max
-                    );
-                    // 顔付近のMeshを目立たせるためのログ
-　　　　　　　　　　　　　　　if (
-                          worldPosition.y < -4000 &&
-                          worldPosition.y > -10000 &&
-                          Math.abs(worldPosition.x) < 3000
-　　　　　　　　　　　　　　　) {
-                           console.log(
-                           "FACE AREA CANDIDATE",
-                           meshCount,
-                           "WORLD:",
-                           worldPosition,
-                           "BOX:",
-                           box
-                       );
-　　　　　　　　　　　　　}
-                }
-            });
+    const node = object as any;
+
+    if (
+        node.threeObj instanceof THREE.Mesh
+    ) {
+        const name = node.name;
+
+        if (
+            name &&
+            (
+                name.includes("口") ||
+                name.includes("唇") ||
+                name.includes("歯") ||
+                name.includes("舌") ||
+                name.includes("目") ||
+                name.includes("白目") ||
+                name.includes("瞳")
+            )
+        ) {
+            const box =
+                new THREE.Box3().setFromObject(
+                    node.threeObj
+                );
+
+            console.log(
+                "FACE PART:",
+                name,
+                "UUID:",
+                node.uuid,
+                "BOX:",
+                box
+            );
+        }
+    }
+});
             console.log("TOTAL MESHES:", meshCount);
             console.log("AFTER RENDER");
         } catch (error) {
