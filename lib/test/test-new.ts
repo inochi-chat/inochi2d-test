@@ -124,6 +124,23 @@ async function loadPuppet() {
            "PUPPET NODES:",
            (puppet as any).nodes
 　　　　　);
+        const debugText =
+    document.createElement("div");
+
+debugText.style.position = "fixed";
+debugText.style.top = "10px";
+debugText.style.left = "10px";
+debugText.style.zIndex = "99999";
+debugText.style.background = "white";
+debugText.style.color = "black";
+debugText.style.padding = "10px";
+debugText.style.fontSize = "16px";
+
+debugText.textContent =
+    "PUPPET NODES: " +
+    String((puppet as any).nodes?.length);
+
+document.body.appendChild(debugText);
         console.log(
             puppet
         );
