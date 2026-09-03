@@ -121,6 +121,10 @@ async function loadPuppet() {
            )
 　　　　　);
         console.log(
+           "PUPPET NODES:",
+           (puppet as any).nodes
+　　　　　);
+        console.log(
             puppet
         );
         console.log(
