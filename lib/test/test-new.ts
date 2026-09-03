@@ -123,10 +123,9 @@ async function loadPuppet() {
                         object.type === "Mesh"
                     ) {
                         const mesh =
-                            object as THREE.Mesh;
+                            object as any;
                         const oldMaterial =
-                            mesh.material
-                            as THREE.MeshBasicMaterial;
+                            mesh.material;
                         mesh.material =
                             new THREE.MeshBasicMaterial({
                                 map:
@@ -149,7 +148,7 @@ async function loadPuppet() {
             );
             /*
             ==========================================
-             Three.js側のメッシュ数確認
+             メッシュ数確認
             ==========================================
             */
             let meshCount = 0;
@@ -160,7 +159,7 @@ async function loadPuppet() {
                     ) {
                         meshCount++;
                         const mesh =
-                            object as THREE.Mesh;
+                            object as any;
                         const worldPosition =
                             mesh.getWorldPosition(
                                 new THREE.Vector3()
@@ -182,11 +181,6 @@ async function loadPuppet() {
                             "BOX MAX:",
                             box.max
                         );
-                        /*
-                        ==================================
-                         顔付近のメッシュ候補
-                        ==================================
-                        */
                         if (
                             worldPosition.y < -4000 &&
                             worldPosition.y > -10000 &&
@@ -222,11 +216,6 @@ async function loadPuppet() {
             console.log(
                 "========== FACE PART SEARCH END =========="
             );
-            /*
-            ==========================================
-             レンダリング確認
-            ==========================================
-            */
             console.log(
                 "AFTER RENDER"
             );
