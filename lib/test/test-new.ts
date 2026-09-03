@@ -138,6 +138,8 @@ async function loadPuppet() {
                                     oldMaterial.map,
                                 transparent:
                                     true,
+　　　　　　　　　　　　　　　　　　　　　opacity:
+                                    oldMaterial.opacity,
                                 depthTest:
                                     false,
        　　　　　　　　　　　　　　　　 depthWrite:
