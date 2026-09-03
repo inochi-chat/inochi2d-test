@@ -131,6 +131,16 @@ async function loadPuppet() {
            }))
 　　　　　　);
          console.log(
+               "PARAM BINDINGS:",
+               (puppet as any).params?.map((p: any) => ({
+                name: p.name,
+                bindings: p.bindings?.map((b: any) => ({
+                    node: b.node,
+                    param_name: b.param_name    
+                }))
+            }))
+　　　　　　);
+         console.log(
             "ROOT NODE KEYS:",
             Object.keys(puppet.rootNode as any)
         );
