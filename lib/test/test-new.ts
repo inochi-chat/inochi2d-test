@@ -109,6 +109,12 @@ async function loadPuppet() {
            Object.keys(puppet.rootNode as any)
 　　　　　);
         console.log(
+           "ROOT CHILDREN KEYS:",
+           puppet.rootNode.children.map(
+               (child: any) => Object.keys(child)
+           )
+　　　　　);
+        console.log(
             puppet
         );
         console.log(
