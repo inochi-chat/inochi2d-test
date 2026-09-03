@@ -113,6 +113,12 @@ async function loadPuppet() {
     　　　　　"PARAMS:",
            (puppet as any).params
 　　　　　);
+        console.log(
+           "PARAM NAMES:",
+           (puppet as any).params?.map(
+           (p: any) => p.name
+            )
+　　　　　);
          console.log(
             "ROOT NODE KEYS:",
             Object.keys(puppet.rootNode as any)
