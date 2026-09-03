@@ -65,21 +65,21 @@ function logFaceParts(node: any) {
                     new THREE.Vector3()
                 );
             console.log(
-    "FACE PART:",
-    name,
-    "UUID:",
-    node.uuid,
-    "ENABLED:",
-    node.enabled,
-    "OPACITY:",
-    (node as any).opacity,
-    "VISIBLE:",
-    node.threeObj.visible,
-    "WORLD:",
-    worldPosition,
-    "BOX:",
-    box
-);
+                "FACE PART:",
+                name,
+                "UUID:",
+                node.uuid,
+                "ENABLED:",
+                node.enabled,
+                "OPACITY:",
+                (node as any).opacity,
+                "VISIBLE:",
+                node.threeObj.visible,
+                "WORLD:",
+                worldPosition,
+                "BOX:",
+                box
+            );
         }
     }
     if (node.children) {
@@ -105,60 +105,78 @@ async function loadPuppet() {
             "PUPPET LOADED"
         );
         console.log(
-           "ROOT NODE KEYS:",
-           Object.keys(puppet.rootNode as any)
-　　　　　);
+            "ROOT NODE KEYS:",
+            Object.keys(puppet.rootNode as any)
+        );
         console.log(
-           "ROOT CHILDREN KEYS:",
-           puppet.rootNode.children.map(
-               (child: any) => Object.keys(child)
-           )
-　　　　　);
+            "ROOT CHILDREN KEYS:",
+            puppet.rootNode.children.map(
+                (child: any) =>
+                    Object.keys(child)
+            )
+        );
         console.log(
-    　　　　　"PUPPET PROTOTYPE KEYS:",
+            "PUPPET PROTOTYPE KEYS:",
             Object.getOwnPropertyNames(
-            Object.getPrototypeOf(puppet)
-           )
-　　　　　);
+                Object.getPrototypeOf(puppet)
+            )
+        );
         console.log(
-           "PUPPET NODES:",
-           (puppet as any).nodes
-　　　　　);
+            "PUPPET NODES:",
+            (puppet as any).nodes
+        );
+        /*
+        ==========================================
+         デバッグ表示
+        ==========================================
+        */
         const debugText =
-    document.createElement("div");
-
-debugText.style.position = "fixed";
-debugText.style.top = "10px";
-debugText.style.left = "10px";
-debugText.style.zIndex = "99999";
-debugText.style.background = "white";
-debugText.style.color = "black";
-debugText.style.padding = "10px";
-debugText.style.fontSize = "16px";
-
-const firstNode =
-    (puppet as any).nodes?.[0];
-
-debugText.textContent =
-    "NODES: " +
-    String((puppet as any).nodes?.length) +
-    "\nNODE KEYS: " +
-    JSON.stringify(
-        Object.keys((puppet as any).nodes?.[0] || {})
-    ) +
-    "\nNODE0: " +
-    JSON.stringify(
-        (puppet as any).nodes?.[0],
-        null,
-        2
-    ).slice(0, 1500);
-document.body.appendChild(debugText);
+            document.createElement("div");
+        debugText.style.position =
+            "fixed";
+        debugText.style.top =
+            "10px";
+        debugText.style.left =
+            "10px";
+        debugText.style.zIndex =
+            "99999";
+        debugText.style.background =
+            "white";
+        debugText.style.color =
+            "black";
+        debugText.style.padding =
+            "10px";
+        debugText.style.fontSize =
+            "16px";
+        const firstNode =
+            (puppet as any).nodes?.[0];
+        debugText.textContent =
+            "NODES: " +
+            String(
+                (puppet as any).nodes?.length
+            ) +
+            "\nHAS PARAM: " +
+            String(
+                firstNode &&
+                Object.prototype.hasOwnProperty.call(
+                    firstNode,
+                    "param"
+                )
+            );
+        document.body.appendChild(
+            debugText
+        );
         console.log(
             puppet
         );
         console.log(
             "BEFORE RENDER"
         );
+        /*
+        ==========================================
+         レンダリング
+        ==========================================
+        */
         try {
             const result =
                 Inochi2D.Renderer.renderPuppet(
@@ -183,19 +201,19 @@ document.body.appendChild(debugText);
                             mesh.material;
                         mesh.material =
                             new THREE.MeshBasicMaterial({
-      　　　　　　　　　　　　　　　　  map:
+                                map:
                                     oldMaterial.map,
                                 transparent:
                                     true,
-　　　　　　　　　　　　　　　　　　　　　opacity:
+                                opacity:
                                     oldMaterial.opacity,
                                 depthTest:
                                     false,
-       　　　　　　　　　　　　　　　　 depthWrite:
+                                depthWrite:
                                     false,
                                 side:
-                                     THREE.DoubleSide
-                             });
+                                    THREE.DoubleSide
+                            });
                         mesh.frustumCulled =
                             false;
                         mesh.renderOrder =
