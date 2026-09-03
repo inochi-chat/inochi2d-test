@@ -115,6 +115,12 @@ async function loadPuppet() {
            )
 　　　　　);
         console.log(
+    　　　　　"PUPPET PROTOTYPE KEYS:",
+            Object.getOwnPropertyNames(
+            Object.getPrototypeOf(puppet)
+           )
+　　　　　);
+        console.log(
             puppet
         );
         console.log(
