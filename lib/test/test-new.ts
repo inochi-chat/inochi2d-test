@@ -226,6 +226,13 @@ async function loadPuppet() {
              表示用マテリアル調整
             ==========================================
             */
+            // ---- Param #0 を最大値にしてみる ----
+　　　　　　　const mouthParam = (puppet as any).params?.[0];
+
+　　　　　　　if (mouthParam) {
+              console.log("TEST PARAM:", mouthParam.name);
+              mouthParam.apply?.([1, 0]);
+　　　　　　　}
             result.rootNode.traverse(
                 (object) => {
                     if (
