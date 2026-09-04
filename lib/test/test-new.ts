@@ -254,20 +254,14 @@ if (param0) {
             "Param #0: " +
             value.toFixed(2);
 
-        const binding =
-            param0.bindings?.find(
-                (b: any) =>
-                    b.param_name === "transform.t.x"
-            );
-
         console.log(
             "PARAM #0 VALUE:",
             value
         );
 
         console.log(
-            "TEST BINDING:",
-            binding
+            "PARAM #0 BINDINGS:",
+            param0.bindings
         );
     }
 );
