@@ -245,22 +245,32 @@ if (param0) {
     slider.value = "0";
 
     slider.addEventListener(
-        "input",
-        () => {
-            const value =
-                Number(slider.value);
+    "input",
+    () => {
+        const value =
+            Number(slider.value);
 
-            label.textContent =
-                "Param #0: " +
-                value.toFixed(2);
+        label.textContent =
+            "Param #0: " +
+            value.toFixed(2);
 
-            console.log(
-                "PARAM #0 TEST VALUE:",
-                value
+        const binding =
+            param0.bindings?.find(
+                (b: any) =>
+                    b.param_name === "transform.t.x"
             );
-        }
-    );
 
+        console.log(
+            "PARAM #0 VALUE:",
+            value
+        );
+
+        console.log(
+            "TEST BINDING:",
+            binding
+        );
+    }
+);
     paramUI.appendChild(label);
     paramUI.appendChild(slider);
 
