@@ -222,63 +222,7 @@ async function loadPuppet() {
                     renderer
                 );
             /*
-==================================================
- メッシュ頂点の直接変形テスト
-==================================================
-*/
-const testMesh =
 
-    result.rootNode.children[0]?.children[0] as THREE.Mesh;
-
-if (testMesh) {
-
-    const position =
-
-        testMesh.geometry.getAttribute("position")
-
-        as THREE.BufferAttribute;
-
-    console.log(
-
-        "=== VERTEX DIRECT TEST ===",
-
-        "COUNT:",
-
-        position.count
-
-    );
-
-    if (position.count > 0) {
-
-        const oldY =
-
-            position.getY(0);
-
-        position.setY(
-
-            0,
-
-            oldY + 100
-
-        );
-
-        position.needsUpdate = true;
-
-        console.log(
-
-            "VERTEX 0 Y:",
-
-            oldY,
-
-            "->",
-
-            position.getY(0)
-
-        );
-
-    }
-
-}
             /*
             ==========================================
              表示用マテリアル調整
