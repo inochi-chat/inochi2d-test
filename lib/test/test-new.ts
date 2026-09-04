@@ -221,47 +221,7 @@ async function loadPuppet() {
                     camera,
                     renderer
                 );
-            const param0 = (puppet as any).params?.[0];
-
-　　　　　　　　if (param0) {
-
-                console.log("=== PARAM 0 DIRECT TEST ===");
-
-                for (const binding of param0.bindings) {
-
-                     const node = (puppet as any).nodes.find(
-                        (n: any) => n.uuid === binding.node
-                     );
-
-                     if (!node) continue;
-
-                     console.log(
-                          "PARAM0 BINDING:",
-                          binding.param_name,
-                          "NODE:",
-                          node.name,
-                          "UUID:",
-                          node.uuid,
-                          "BEFORE:",
-                          node.transform.trans.x,
-                          node.transform.trans.y
-                    );
-
-                    if (binding.param_name === "transform.t.x") {
-                        node.transform.trans.x += 500;
-                    }
-
-                    if (binding.param_name === "transform.t.y") {
-                    node.transform.trans.y += 500;
-                    }
-
-                    node.update();
-              }
-
-              result.rootNode.updateMatrixWorld(true);
-
-              console.log("=== PARAM 0 DIRECT TEST END ===");
-　　　　　　　}
+            
             /*
             ==========================================
              表示用マテリアル調整
