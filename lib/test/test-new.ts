@@ -209,6 +209,66 @@ async function loadPuppet() {
             "BEFORE RENDER"
         );
         /*
+==================================================
+ Param #0 テストスライダー
+==================================================
+*/
+const param0 =
+    (puppet as any).params?.[0];
+
+if (param0) {
+    const paramUI =
+        document.createElement("div");
+
+    paramUI.style.position = "fixed";
+    paramUI.style.top = "150px";
+    paramUI.style.left = "10px";
+    paramUI.style.zIndex = "99999";
+    paramUI.style.background = "white";
+    paramUI.style.color = "black";
+    paramUI.style.padding = "10px";
+    paramUI.style.fontSize = "16px";
+
+    const label =
+        document.createElement("div");
+
+    label.textContent =
+        "Param #0: 0.00";
+
+    const slider =
+        document.createElement("input");
+
+    slider.type = "range";
+    slider.min = "0";
+    slider.max = "1";
+    slider.step = "0.01";
+    slider.value = "0";
+
+    slider.addEventListener(
+        "input",
+        () => {
+            const value =
+                Number(slider.value);
+
+            label.textContent =
+                "Param #0: " +
+                value.toFixed(2);
+
+            console.log(
+                "PARAM #0 TEST VALUE:",
+                value
+            );
+        }
+    );
+
+    paramUI.appendChild(label);
+    paramUI.appendChild(slider);
+
+    document.body.appendChild(
+        paramUI
+    );
+}
+        /*
         ==========================================
          レンダリング
         ==========================================
