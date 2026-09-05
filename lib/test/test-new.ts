@@ -267,10 +267,31 @@ if (param0) {
         );
 
         if (binding) {
-    label.textContent =
-        "Param #0: " +
-        value.toFixed(2) +
-        " / TX binding OK";
+    const node =
+        puppet.nodes.find(
+            (n: any) =>
+                n.uuid === binding.node
+        );
+
+    if (node) {
+        const originalX =
+            node.transform.trans.x;
+
+        node.transform.trans.x =
+            originalX + value * 10;
+
+        node.update();
+
+        label.textContent =
+            "Param #0: " +
+            value.toFixed(2) +
+            " / NODE OK";
+    } else {
+        label.textContent =
+            "Param #0: " +
+            value.toFixed(2) +
+            " / NODE NG";
+    }
 } else {
     label.textContent =
         "Param #0: " +
