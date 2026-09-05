@@ -266,10 +266,17 @@ if (param0) {
             value
         );
 
-        console.log(
-            "FOUND TX BINDING:",
-            binding
-        );
+        if (binding) {
+    label.textContent =
+        "Param #0: " +
+        value.toFixed(2) +
+        " / TX binding OK";
+} else {
+    label.textContent =
+        "Param #0: " +
+        value.toFixed(2) +
+        " / TX binding NG";
+}
     }
 );
     paramUI.appendChild(label);
